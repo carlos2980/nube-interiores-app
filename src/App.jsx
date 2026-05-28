@@ -323,12 +323,12 @@ const total = material + instalacion;
   type="number"
   step="0.01"
   value={medidas.ancho}
-  onChange={(e) =>
+  onChange={(e) => {
     setMedidas((prev) => ({
       ...prev,
       ancho: e.target.value,
-    }))
-  }
+    }));
+  }}
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
@@ -339,12 +339,12 @@ const total = material + instalacion;
   type="number"
   step="0.01"
   value={medidas.alto}
-  onChange={(e) =>
+  onChange={(e) => {
     setMedidas((prev) => ({
       ...prev,
       alto: e.target.value,
-    }))
-  }
+    }));
+  }}
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
