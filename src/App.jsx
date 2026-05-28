@@ -1,3 +1,230 @@
+
+                <div className="flex items-center justify-between">
+                  <p className="text-2xl font-bold">
+                    {formatPrice(producto.precio)}{" "}
+                    <span className="text-sm font-normal">
+                      / {producto.unidad}
+                    </span>
+                  </p>
+                  <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
+                    Disponible
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold">Descripción</h3>
+                  <p className="text-sm text-neutral-600 mt-1">
+                    {producto.descripcion}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setTab("cotizador")}
+                  className="w-full bg-black text-white rounded-2xl py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-[1.02]"
+                >
+                  Cotizar este producto
+                </button>
+              </div>
+            </section>
+          )}
+
+          {tab === "cotizador" && producto && (
+            <section className="space-y-5">
+              <div>
+                <label className="font-semibold text-sm">
+                  Selecciona un producto
+                </label>
+                <select
+                  className="mt-2 w-full border border-[#e5ddd0] rounded-2xl p-3 bg-white"
+                  value={producto.id}
+                  onChange={(e) => {
+                    const seleccionado = productos.find(
+                      (p) => String(p.id) === e.target.value
+                    );
+                    setProductoActivo(seleccionado);
+                  }}
+                >
+                  {productos.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="bg-white border border-[#e5ddd0] rounded-2xl p-3 flex gap-3 shadow-sm">
+                <img
+                  src={getImagen(producto)}
+                  className="w-20 h-20 rounded-xl object-cover"
+                  alt={producto.nombre}
+                />
+                <div>
+                  <h3 className="font-semibold text-sm">{producto.nombre}</h3>
+                  <p className="text-xs text-neutral-500">
+                    {formatPrice(producto.precio)} / {producto.unidad}
+                  </p>
+                  <p className="text-xs text-neutral-500">
+                    Instalación: {formatPrice(producto.instalacion)} / m²
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-sm mb-2">
+                  ¿Cuánto necesitas?
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="border border-[#e5ddd0] rounded-2xl p-3 bg-white">
+                    <label className="text-xs text-neutral-500">
+                      Ancho en metros
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      className="w-full outline-none text-lg font-semibold mt-1"
+                      value={ancho}
+                      onChange={(e) => setAncho(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="border border-[#e5ddd0] rounded-2xl p-3 bg-white">
+                    <label className="text-xs text-neutral-500">
+                      Alto en metros
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      className="w-full outline-none text-lg font-semibold mt-1"
+                      value={alto}
+                      onChange={(e) => setAlto(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4 shadow-sm">
+                <span className="font-semibold text-sm">
+                  Incluir instalación
+                </span>
+                <input
+                  type="checkbox"
+                  checked={incluirInstalacion}
+                  onChange={(e) => setIncluirInstalacion(e.target.checked)}
+                />
+              </label>
+
+              <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2 shadow-inner">
+                <div className="flex justify-between text-sm">
+                  <span>Total m²</span>
+                  <strong>{m2.toFixed(2)} m²</strong>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span>Material</span>
+                  <strong>{formatPrice(material)}</strong>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span>Instalación</span>
+                  <strong>{formatPrice(instalacion)}</strong>
+                </div>
+                <div className="border-t border-[#d8cfc0] pt-3 flex justify-between text-lg">
+                  <span>Total</span>
+                  <strong>{formatPrice(total)}</strong>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setTab("resumen")}
+                className="w-full bg-black text-white rounded-2xl py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-[1.02]"
+              >
+                Ver resumen
+              </button>
+            </section>
+          )}
+
+          {tab === "resumen" && producto && (
+            <section className="space-y-5">
+              <h2 className="text-xl font-bold">Resumen de tu cotización</h2>
+
+              <div className="bg-white border border-[#e5ddd0] rounded-3xl p-4 shadow-md flex gap-3">
+                <img
+                  src={getImagen(producto)}
+                  className="w-20 h-20 rounded-2xl object-cover"
+                  alt={producto.nombre}
+                />
+                <div>
+                  <h3 className="font-semibold text-sm">{producto.nombre}</h3>
+                  <p className="text-xs text-neutral-500">
+                    {m2.toFixed(2)} m² × {formatPrice(producto.precio)}
+                  </p>
+                  <p className="font-bold mt-2">{formatPrice(material)}</p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span>Materiales</span>
+                  <strong>{formatPrice(material)}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span>Instalación estimada</span>
+                  <strong>{formatPrice(instalacion)}</strong>
+                </div>
+                <div className="flex justify-between text-lg border-t pt-3">
+                  <span>Total</span>
+                  <strong>{formatPrice(total)}</strong>
+                </div>
+              </div>
+
+              <div className="bg-[#f3ecdf] rounded-3xl p-5 text-center shadow-inner">
+                <p className="text-sm text-neutral-500">Total estimado</p>
+                <p className="text-3xl font-bold">{formatPrice(total)}</p>
+                <p className="text-xs text-neutral-500 mt-1">
+                  Precios sujetos a confirmación.
+                </p>
+              </div>
+
+              <a
+                href={`https://wa.me/?text=${mensajeWhatsapp}`}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full bg-black text-white rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 shadow-lg transition-all duration-300 hover:scale-[1.02]"
+              >
+                <MessageCircle size={20} /> Enviar por WhatsApp
+              </a>
+
+              <button className="w-full border border-black text-black rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 transition-all duration-300 hover:bg-black hover:text-white">
+                <Share2 size={20} /> Guardar cotización
+              </button>
+            </section>
+          )}
+        </main>
+
+        <nav className="absolute bottom-0 left-0 right-0 bg-[#fcfbf8]/95 backdrop-blur-md border-t border-[#e5ddd0] px-4 py-4 grid grid-cols-5 gap-1">
+          <NavButton active={tab === "inicio"} icon={<Home size={20} />} label="Inicio" onClick={() => setTab("inicio")} />
+          <NavButton active={tab === "catalogo" || tab === "producto"} icon={<Grid2X2 size={20} />} label="Catálogo" onClick={() => setTab("catalogo")} />
+          <NavButton active={tab === "cotizador"} icon={<Calculator size={20} />} label="Cotizar" onClick={() => setTab("cotizador")} />
+          <NavButton active={tab === "resumen"} icon={<FileText size={20} />} label="Resumen" onClick={() => setTab("resumen")} />
+          <NavButton active={false} icon={<User size={20} />} label="Perfil" onClick={() => alert("Perfil próximamente")} />
+        </nav>
+      </div>
+    </div>
+  );
+}
+
+function NavButton({ active, icon, label, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex flex-col items-center gap-1 text-[11px] transition-all ${
+        active ? "text-black font-bold" : "text-neutral-400"
+      }`}
+    >
+      {icon}
+      {label}
+    </button>
+  );
+}
+
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Search,
@@ -41,14 +268,48 @@ function getImagen(producto) {
   return producto?.imagen_url || producto?.imagen || "/categorias/lambrin-interior.png";
 }
 
+function calcularLambrinCaja(ancho, alto, producto) {
+  const anchoPieza = Number(producto?.ancho_pieza_m || 0.16);
+  const largoPieza = Number(producto?.largo_pieza_m || 2.9);
+  const piezasCaja = Number(producto?.piezas_caja || 14);
+  const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
+  const rendimientoCaja = Number(producto?.rendimiento_caja_m2 || 6.49);
+
+  const area = ancho * alto;
+  const piezasBase = Math.ceil(ancho / anchoPieza);
+
+  let piezasTotales = piezasBase;
+
+  if (alto > largoPieza) {
+    const sobranteAltura = alto - largoPieza;
+    const aprovechamiento = Math.max(Math.floor(largoPieza / sobranteAltura), 1);
+    const piezasExtra = Math.ceil(piezasBase / aprovechamiento);
+    piezasTotales = piezasBase + piezasExtra;
+  }
+
+  const cajasPorPiezas = Math.ceil(piezasTotales / piezasCaja);
+  const cajasPorM2 = Math.ceil(area / rendimientoCaja);
+  const cajas = Math.max(cajasPorPiezas, cajasPorM2);
+
+  return {
+    m2: area,
+    piezasBase,
+    piezasTotales,
+    cajas,
+    material: cajas * precioCaja,
+    rendimientoCaja,
+    piezasCaja,
+  };
+}
+
 export default function NubeInterioresApp() {
   const [tab, setTab] = useState("inicio");
   const [categoria, setCategoria] = useState("Todas");
   const [busqueda, setBusqueda] = useState("");
   const [productos, setProductos] = useState([]);
   const [productoActivo, setProductoActivo] = useState(null);
-  const [ancho, setAncho] = useState(2.8);
-  const [alto, setAlto] = useState(2.6);
+  const [ancho, setAncho] = useState(3);
+  const [alto, setAlto] = useState(3.5);
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
   const [cargando, setCargando] = useState(true);
 
@@ -101,19 +362,38 @@ export default function NubeInterioresApp() {
 
   const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 
-  const m2 = Math.max(Number(ancho) || 0, 0) * Math.max(Number(alto) || 0, 0);
-  const material = producto ? m2 * Number(producto.precio || 0) : 0;
-  const instalacion =
-    producto && incluirInstalacion ? m2 * Number(producto.instalacion || 0) : 0;
+  const anchoNumero = Math.max(Number(ancho) || 0, 0);
+  const altoNumero = Math.max(Number(alto) || 0, 0);
+  const esLambrinCaja = producto?.tipo_calculo === "lambrin_caja";
+
+  const calculoLambrin = esLambrinCaja
+    ? calcularLambrinCaja(anchoNumero, altoNumero, producto)
+    : null;
+
+  const m2 = calculoLambrin ? calculoLambrin.m2 : anchoNumero * altoNumero;
+  const material = calculoLambrin
+    ? calculoLambrin.material
+    : m2 * Number(producto?.precio || 0);
+
+  const instalacion = producto && incluirInstalacion
+    ? m2 * Number(producto.instalacion || 0)
+    : 0;
+
   const total = material + instalacion;
 
   const mensajeWhatsapp = encodeURIComponent(
     producto
-      ? `Hola, quiero cotizar con Nube Interiores:\n\nProducto: ${producto.nombre}\nCódigo: ${producto.codigo}\nMedida: ${ancho} m x ${alto} m\nTotal m²: ${m2.toFixed(
-          2
-        )} m²\nMaterial: ${formatPrice(material)}\nInstalación: ${
-          incluirInstalacion ? formatPrice(instalacion) : "No incluida"
-        }\nTotal estimado: ${formatPrice(total)}`
+      ? `Hola, quiero cotizar con Nube Interiores:
+
+Producto: ${producto.nombre}
+Código: ${producto.codigo}
+Medida: ${ancho} m x ${alto} m
+Total m²: ${m2.toFixed(2)} m²
+${calculoLambrin ? `Piezas necesarias: ${calculoLambrin.piezasTotales}
+Cajas necesarias: ${calculoLambrin.cajas}` : ""}
+Material: ${formatPrice(material)}
+Instalación: ${incluirInstalacion ? formatPrice(instalacion) : "No incluida"}
+Total estimado: ${formatPrice(total)}`
       : "Hola, quiero cotizar con Nube Interiores."
   );
 
@@ -301,7 +581,7 @@ export default function NubeInterioresApp() {
                         {productoItem.nombre}
                       </h3>
                       <p className="text-xs text-neutral-500 mt-1">
-                        {formatPrice(productoItem.precio)} /{" "}
+                        {formatPrice(productoItem.precio_caja || productoItem.precio)} /{" "}
                         {productoItem.unidad}
                       </p>
                     </div>
@@ -327,7 +607,7 @@ export default function NubeInterioresApp() {
 
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-bold">
-                    {formatPrice(producto.precio)}{" "}
+                    {formatPrice(producto.precio_caja || producto.precio)}{" "}
                     <span className="text-sm font-normal">
                       / {producto.unidad}
                     </span>
@@ -343,6 +623,25 @@ export default function NubeInterioresApp() {
                     {producto.descripcion}
                   </p>
                 </div>
+
+                {producto.tipo_calculo === "lambrin_caja" && (
+                  <div className="bg-[#f3ecdf] rounded-2xl p-4 text-sm space-y-1">
+                    <p>
+                      <strong>Tipo:</strong> Venta por caja
+                    </p>
+                    <p>
+                      <strong>Piezas por caja:</strong> {producto.piezas_caja}
+                    </p>
+                    <p>
+                      <strong>Medida pieza:</strong> {producto.ancho_pieza_m} m ×{" "}
+                      {producto.largo_pieza_m} m
+                    </p>
+                    <p>
+                      <strong>Rendimiento caja:</strong>{" "}
+                      {producto.rendimiento_caja_m2} m²
+                    </p>
+                  </div>
+                )}
 
                 <button
                   onClick={() => setTab("cotizador")}
@@ -387,7 +686,8 @@ export default function NubeInterioresApp() {
                 <div>
                   <h3 className="font-semibold text-sm">{producto.nombre}</h3>
                   <p className="text-xs text-neutral-500">
-                    {formatPrice(producto.precio)} / {producto.unidad}
+                    {formatPrice(producto.precio_caja || producto.precio)} /{" "}
+                    {producto.unidad}
                   </p>
                   <p className="text-xs text-neutral-500">
                     Instalación: {formatPrice(producto.instalacion)} / m²
@@ -397,7 +697,7 @@ export default function NubeInterioresApp() {
 
               <div>
                 <h3 className="font-semibold text-sm mb-2">
-                  ¿Cuánto necesitas?
+                  Medidas del muro
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="border border-[#e5ddd0] rounded-2xl p-3 bg-white">
@@ -428,6 +728,28 @@ export default function NubeInterioresApp() {
                 </div>
               </div>
 
+              {calculoLambrin && (
+                <div className="bg-white border border-[#e5ddd0] rounded-3xl p-4 shadow-sm space-y-2 text-sm">
+                  <h3 className="font-bold text-base">Cálculo por cajas</h3>
+                  <div className="flex justify-between">
+                    <span>Área aproximada</span>
+                    <strong>{m2.toFixed(2)} m²</strong>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Piezas por ancho</span>
+                    <strong>{calculoLambrin.piezasBase} pzs</strong>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Piezas necesarias</span>
+                    <strong>{calculoLambrin.piezasTotales} pzs</strong>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Cajas necesarias</span>
+                    <strong>{calculoLambrin.cajas} cajas</strong>
+                  </div>
+                </div>
+              )}
+
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4 shadow-sm">
                 <span className="font-semibold text-sm">
                   Incluir instalación
@@ -444,6 +766,20 @@ export default function NubeInterioresApp() {
                   <span>Total m²</span>
                   <strong>{m2.toFixed(2)} m²</strong>
                 </div>
+
+                {calculoLambrin && (
+                  <>
+                    <div className="flex justify-between text-sm">
+                      <span>Total piezas</span>
+                      <strong>{calculoLambrin.piezasTotales} pzs</strong>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span>Total cajas</span>
+                      <strong>{calculoLambrin.cajas} cajas</strong>
+                    </div>
+                  </>
+                )}
+
                 <div className="flex justify-between text-sm">
                   <span>Material</span>
                   <strong>{formatPrice(material)}</strong>
@@ -480,13 +816,27 @@ export default function NubeInterioresApp() {
                 <div>
                   <h3 className="font-semibold text-sm">{producto.nombre}</h3>
                   <p className="text-xs text-neutral-500">
-                    {m2.toFixed(2)} m² × {formatPrice(producto.precio)}
+                    {m2.toFixed(2)} m²
+                    {calculoLambrin ? ` · ${calculoLambrin.cajas} cajas` : ""}
                   </p>
                   <p className="font-bold mt-2">{formatPrice(material)}</p>
                 </div>
               </div>
 
               <div className="space-y-3 text-sm">
+                {calculoLambrin && (
+                  <>
+                    <div className="flex justify-between">
+                      <span>Piezas necesarias</span>
+                      <strong>{calculoLambrin.piezasTotales} pzs</strong>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Cajas necesarias</span>
+                      <strong>{calculoLambrin.cajas} cajas</strong>
+                    </div>
+                  </>
+                )}
+
                 <div className="flex justify-between">
                   <span>Materiales</span>
                   <strong>{formatPrice(material)}</strong>
