@@ -211,14 +211,19 @@ export default function App() {
               <div className="flex gap-2 overflow-x-auto">
                 {categorias.map((cat) => (
                   <button
-                    key={cat}
-                    onClick={() => setCategoria(cat)}
-                    className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-                      categoria === cat ? "bg-black text-white" : "bg-[#f1ece3]"
-                    }`}
-                  >
-                    {cat}
-                  </button>
+  key={cat}
+  onClick={() => {
+    setCategoria(cat);
+    setProductoActivo(null);
+  }}
+  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
+    categoria === cat
+      ? "bg-black text-white"
+      : "bg-[#f1ece3]"
+  }`}
+>
+  {cat}
+</button>
                 ))}
               </div>
 
