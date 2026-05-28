@@ -343,25 +343,21 @@ const calculo = {
               </div>
 
               <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
-                <div className="flex justify-between">
-                  <span>Área</span>
-                  <strong>{m2.toFixed(2)} m²</strong>
-                </div>
+  <div className="flex justify-between">
+    <span>Área</span>
+    <strong>{calculo.area.toFixed(2)} m²</strong>
+  </div>
 
-                {producto.tipo_calculo === "lambrin_caja" && (
-                  <>
-                    <div className="flex justify-between">
-                      <span>Rendimiento por caja</span>
-                      <strong>{calculo.rendimientoCaja} m²</strong>
-                    </div>
+  <div className="flex justify-between">
+    <span>Rendimiento por caja</span>
+    <strong>{calculo.rendimientoCaja} m²</strong>
+  </div>
 
-                    <div className="flex justify-between">
-                      <span>Cajas necesarias</span>
-                      <strong>{calculo.cajas} cajas</strong>
-                    </div>
-                  </>
-                )}
-              </div>
+  <div className="flex justify-between">
+    <span>Cajas necesarias</span>
+    <strong>{calculo.cajas} cajas</strong>
+  </div>
+</div>
 
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4">
                 <span className="font-semibold text-sm">Incluir instalación</span>
