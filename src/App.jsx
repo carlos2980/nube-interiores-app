@@ -161,9 +161,13 @@ export default function NubeInterioresApp() {
           {tab === "inicio" && (
             <section className="space-y-6">
               <div className="text-center pt-4">
-                <div className="mx-auto w-28 h-20 rounded-[2rem] border-2 border-black flex items-center justify-center text-4xl font-light bg-white shadow-sm">
-                  ☁
-                </div>
+                <div className="flex justify-center">
+  <img
+    src="https://raw.githubusercontent.com/carlos2980/nube-interiores-app/main/src/logo.png"
+    alt="Logo Nube"
+    className="w-28 h-28 object-contain"
+  />
+</div>
 
                 <h1 className="text-5xl tracking-[0.45em] font-extralight mt-5 text-[#1d1d1d]">
                   NUBE
