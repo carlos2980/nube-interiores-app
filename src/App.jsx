@@ -322,8 +322,13 @@ const total = material + instalacion;
                   <input
   type="number"
   step="0.01"
-  value={ancho}
-  onInput={(e) => setAncho(e.target.value)}
+  value={medidas.ancho}
+  onChange={(e) =>
+    setMedidas((prev) => ({
+      ...prev,
+      ancho: e.target.value,
+    }))
+  }
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
@@ -333,8 +338,13 @@ const total = material + instalacion;
                   <input
   type="number"
   step="0.01"
-  value={alto}
-  onInput={(e) => setAlto(e.target.value)}
+  value={medidas.alto}
+  onChange={(e) =>
+    setMedidas((prev) => ({
+      ...prev,
+      alto: e.target.value,
+    }))
+  }
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
