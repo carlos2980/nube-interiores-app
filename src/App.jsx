@@ -12,75 +12,34 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-const productos = [
-  {
-    id: 1,
-    categoria: "Lambrín",
-    nombre: "Lambrín WPC Roble Natural",
-    codigo: "LAM-WPC-001",
-    precio: 850,
-    instalacion: 180,
-    unidad: "m²",
-    imagen:
-      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?q=80&w=1200&auto=format&fit=crop",
-    descripcion:
-      "Lambrín decorativo tipo WPC, ideal para muros interiores y exteriores. Acabado premium tipo madera natural.",
-  },
-  {
-    id: 2,
-    categoria: "Papel Tapiz",
-    nombre: "Papel Tapiz Textura Beige",
-    codigo: "PT-002",
-    precio: 1250,
-    instalacion: 350,
-    unidad: "rollo",
-    imagen:
-      "https://images.unsplash.com/photo-1615529162924-f8605388461d?q=80&w=1200&auto=format&fit=crop",
-    descripcion:
-      "Papel tapiz elegante en tono beige con textura sutil. Ideal para recámaras, salas y muros decorativos.",
-  },
-  {
-    id: 3,
-    categoria: "SPC / PVC",
-    nombre: "Piso SPC Nogal Claro",
-    codigo: "SPC-003",
-    precio: 620,
-    instalacion: 160,
-    unidad: "m²",
-    imagen:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
-    descripcion:
-      "Piso SPC resistente al agua, acabado madera nogal claro, perfecto para interiores modernos.",
-  },
-  {
-    id: 4,
-    categoria: "Cortinas",
-    nombre: "Cortina Hotelera Premium",
-    codigo: "COR-004",
-    precio: 980,
-    instalacion: 220,
-    unidad: "m²",
-    imagen:
-      "https://images.unsplash.com/photo-1617103996702-96ff29b1c467?q=80&w=1200&auto=format&fit=crop",
-    descripcion:
-      "Cortina tipo hotelera con caída elegante. Se cotiza por medida del claro o muro.",
-  },
-  {
-    id: 5,
-    categoria: "Follaje",
-    nombre: "Follaje Artificial Tropical",
-    codigo: "FOL-005",
-    precio: 690,
-    instalacion: 150,
-    unidad: "m²",
-    imagen:
-      "https://images.unsplash.com/photo-1530482817083-29ae4b92ff15?q=80&w=1200&auto=format&fit=crop",
-    descripcion:
-      "Follaje artificial decorativo para muros verdes, terrazas, locales y espacios comerciales.",
-  },
+const categoriasVisuales = [
+  { nombre: "Cortinas", imagen: "/categorias/cortinas.png" },
+  { nombre: "Persianas", imagen: "/categorias/persianas.png" },
+  { nombre: "Lambrín Interior", imagen: "/categorias/lambrin-interior.png" },
+  { nombre: "Lambrín Exterior", imagen: "/categorias/lambrin-exterior.png" },
+  { nombre: "Placas PVC", imagen: "/categorias/placas-pvc.png" },
+  { nombre: "Plafón PVC", imagen: "/categorias/plafon-pvc.png" },
+  { nombre: "Vigas WPC", imagen: "/categorias/vigas-wpc.png" },
+  { nombre: "Follaje Artificial", imagen: "/categorias/follaje-artificial.png" },
+  { nombre: "Pasto Artificial", imagen: "/categorias/pasto-artificial.png" },
+  { nombre: "Wall Cladding", imagen: "/categorias/wall-cladding.png" },
+  { nombre: "Papel Tapiz", imagen: "/categorias/papel-tapiz.png" },
+  { nombre: "Vegetación Artificial", imagen: "/categorias/vegetacion-artificial.png" },
 ];
 
-const categorias = ["Todas", ...new Set(productos.map((p) => p.categoria))];
+const productos = categoriasVisuales.map((cat, index) => ({
+  id: index + 1,
+  categoria: cat.nombre,
+  nombre: cat.nombre,
+  codigo: `NUBE-${String(index + 1).padStart(3, "0")}`,
+  precio: 850,
+  instalacion: 180,
+  unidad: "m²",
+  imagen: cat.imagen,
+  descripcion: `${cat.nombre} premium para proyectos residenciales y comerciales.`,
+}));
+
+const categorias = ["Todas", ...categoriasVisuales.map((c) => c.nombre)];
 
 function formatPrice(value) {
   return new Intl.NumberFormat("es-MX", {
@@ -125,10 +84,7 @@ export default function NubeInterioresApp() {
       <div className="w-full max-w-sm bg-[#fcfbf8] min-h-[780px] rounded-[2.8rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden border border-[#e8e1d5] relative">
         <div className="px-6 pt-6 pb-4 flex items-center justify-between">
           {tab === "producto" ? (
-            <button
-              onClick={() => setTab("catalogo")}
-              className="p-2 rounded-full hover:bg-[#f1ece3] transition-all"
-            >
+            <button onClick={() => setTab("catalogo")} className="p-2 rounded-full hover:bg-[#f1ece3] transition-all">
               <ArrowLeft size={22} />
             </button>
           ) : (
@@ -162,12 +118,12 @@ export default function NubeInterioresApp() {
             <section className="space-y-6">
               <div className="text-center pt-4">
                 <div className="flex justify-center">
-  <img
-    src="https://raw.githubusercontent.com/carlos2980/nube-interiores-app/main/src/logo.png"
-    alt="Logo Nube"
-    className="w-28 h-28 object-contain"
-  />
-</div>
+                  <img
+                    src="/logo.png"
+                    alt="Logo Nube"
+                    className="w-24 h-24 object-contain"
+                  />
+                </div>
 
                 <h1 className="text-5xl tracking-[0.45em] font-extralight mt-5 text-[#1d1d1d]">
                   NUBE
@@ -194,23 +150,27 @@ export default function NubeInterioresApp() {
               </div>
 
               <div className="grid grid-cols-4 gap-4">
-                {categorias
-                  .filter((c) => c !== "Todas")
-                  .map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => {
-                        setCategoria(cat);
-                        setTab("catalogo");
-                      }}
-                      className="text-center transition-all duration-300 hover:scale-105"
-                    >
-                      <div className="w-full aspect-square rounded-full bg-[#e8dfd0] flex items-center justify-center text-xl shadow-md">
-                        ▥
-                      </div>
-                      <p className="text-[11px] mt-2 truncate">{cat}</p>
-                    </button>
-                  ))}
+                {categoriasVisuales.map((cat) => (
+                  <button
+                    key={cat.nombre}
+                    onClick={() => {
+                      setCategoria(cat.nombre);
+                      setTab("catalogo");
+                    }}
+                    className="text-center transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="w-full aspect-square rounded-full bg-[#eadfce] p-1 shadow-lg overflow-hidden border border-[#efe3d2]">
+                      <img
+                        src={cat.imagen}
+                        alt={cat.nombre}
+                        className="w-full h-full rounded-full object-cover"
+                      />
+                    </div>
+                    <p className="text-[11px] mt-2 leading-tight font-medium">
+                      {cat.nombre}
+                    </p>
+                  </button>
+                ))}
               </div>
 
               <div className="rounded-[34px] overflow-hidden relative h-64 shadow-2xl">
@@ -277,7 +237,7 @@ export default function NubeInterioresApp() {
                   >
                     <img
                       src={producto.imagen}
-                      className="h-28 w-full object-cover"
+                      className="h-32 w-full object-cover"
                       alt={producto.nombre}
                     />
                     <div className="p-3">
@@ -304,12 +264,8 @@ export default function NubeInterioresApp() {
 
               <div className="px-5 pt-5 space-y-4">
                 <div>
-                  <h1 className="text-2xl font-bold">
-                    {productoActivo.nombre}
-                  </h1>
-                  <p className="text-neutral-500 text-sm">
-                    {productoActivo.codigo}
-                  </p>
+                  <h1 className="text-2xl font-bold">{productoActivo.nombre}</h1>
+                  <p className="text-neutral-500 text-sm">{productoActivo.codigo}</p>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -375,8 +331,7 @@ export default function NubeInterioresApp() {
                     {productoActivo.nombre}
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    {formatPrice(productoActivo.precio)} /{" "}
-                    {productoActivo.unidad}
+                    {formatPrice(productoActivo.precio)} / {productoActivo.unidad}
                   </p>
                   <p className="text-xs text-neutral-500">
                     Instalación: {formatPrice(productoActivo.instalacion)} / m²
@@ -418,9 +373,7 @@ export default function NubeInterioresApp() {
               </div>
 
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4 shadow-sm">
-                <span className="font-semibold text-sm">
-                  Incluir instalación
-                </span>
+                <span className="font-semibold text-sm">Incluir instalación</span>
                 <input
                   type="checkbox"
                   checked={incluirInstalacion}
@@ -471,8 +424,7 @@ export default function NubeInterioresApp() {
                     {productoActivo.nombre}
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    {m2.toFixed(2)} m² ×{" "}
-                    {formatPrice(productoActivo.precio)}
+                    {m2.toFixed(2)} m² × {formatPrice(productoActivo.precio)}
                   </p>
                   <p className="font-bold mt-2">{formatPrice(material)}</p>
                 </div>
@@ -518,36 +470,11 @@ export default function NubeInterioresApp() {
         </main>
 
         <nav className="absolute bottom-0 left-0 right-0 bg-[#fcfbf8]/95 backdrop-blur-md border-t border-[#e5ddd0] px-4 py-4 grid grid-cols-5 gap-1">
-          <NavButton
-            active={tab === "inicio"}
-            icon={<Home size={20} />}
-            label="Inicio"
-            onClick={() => setTab("inicio")}
-          />
-          <NavButton
-            active={tab === "catalogo" || tab === "producto"}
-            icon={<Grid2X2 size={20} />}
-            label="Catálogo"
-            onClick={() => setTab("catalogo")}
-          />
-          <NavButton
-            active={tab === "cotizador"}
-            icon={<Calculator size={20} />}
-            label="Cotizar"
-            onClick={() => setTab("cotizador")}
-          />
-          <NavButton
-            active={tab === "resumen"}
-            icon={<FileText size={20} />}
-            label="Resumen"
-            onClick={() => setTab("resumen")}
-          />
-          <NavButton
-            active={false}
-            icon={<User size={20} />}
-            label="Perfil"
-            onClick={() => alert("Perfil próximamente")}
-          />
+          <NavButton active={tab === "inicio"} icon={<Home size={20} />} label="Inicio" onClick={() => setTab("inicio")} />
+          <NavButton active={tab === "catalogo" || tab === "producto"} icon={<Grid2X2 size={20} />} label="Catálogo" onClick={() => setTab("catalogo")} />
+          <NavButton active={tab === "cotizador"} icon={<Calculator size={20} />} label="Cotizar" onClick={() => setTab("cotizador")} />
+          <NavButton active={tab === "resumen"} icon={<FileText size={20} />} label="Resumen" onClick={() => setTab("resumen")} />
+          <NavButton active={false} icon={<User size={20} />} label="Perfil" onClick={() => alert("Perfil próximamente")} />
         </nav>
       </div>
     </div>
