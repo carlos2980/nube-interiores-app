@@ -327,28 +327,23 @@ export default function App() {
               </div>
 
               {calculo && (
-                <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
-                  <div className="flex justify-between">
-                    <span>Área</span>
-                    <strong>{m2.toFixed(2)} m²</strong>
-                  </div>
+  <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
+    <div className="flex justify-between">
+      <span>Área</span>
+      <strong>{m2.toFixed(2)} m²</strong>
+    </div>
 
-                  <div className="flex justify-between">
-                    <span>Piezas por ancho</span>
-                    <strong>{calculo.piezasPorFila} pzs</strong>
-                  </div>
+    <div className="flex justify-between">
+      <span>Rendimiento por caja</span>
+      <strong>{producto.rendimiento_caja_m2} m²</strong>
+    </div>
 
-                  <div className="flex justify-between">
-                    <span>Piezas necesarias</span>
-                    <strong>{calculo.piezasTotales} pzs</strong>
-                  </div>
-
-                  <div className="flex justify-between">
-                    <span>Cajas necesarias</span>
-                    <strong>{calculo.cajas} cajas</strong>
-                  </div>
-                </div>
-              )}
+    <div className="flex justify-between">
+      <span>Cajas necesarias</span>
+      <strong>{calculo.cajas} cajas</strong>
+    </div>
+  </div>
+)}
 
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4">
                 <span className="font-semibold text-sm">Incluir instalación</span>
