@@ -187,9 +187,10 @@ export default function App() {
                   <button
                     key={cat.nombre}
                     onClick={() => {
-                      setCategoria(cat.nombre);
-                      setTab("catalogo");
-                    }}
+  setCategoria(cat.nombre);
+  setProductoActivo(null);
+  setTab("catalogo");
+}}
                   >
                     <div className="w-full aspect-square rounded-full overflow-hidden bg-[#eadfce] shadow-lg">
                       <img
