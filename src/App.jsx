@@ -360,7 +360,7 @@ const calculo = {
     <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
       <div className="flex justify-between">
         <span>Área</span>
-        <strong>{m2.toFixed(2)} m²</strong>
+        <strong>{areaVista.toFixed(2)} m²</strong>
       </div>
 
       <div className="flex justify-between">
@@ -370,7 +370,7 @@ const calculo = {
 
       <div className="flex justify-between">
         <span>Cajas necesarias</span>
-        <strong>{calculo.cajas} cajas</strong>
+        <strong>{cajasVista} cajas</strong>
       </div>
     </div>
   );
