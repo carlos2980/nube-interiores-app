@@ -313,7 +313,7 @@ const calculo = {
                   <input
   type="number"
   step="0.01"
-  value={medidas.alto}
+  value={medidas.ancho}
   onChange={(e) => {
     const valor = e.target.value;
     setMedidas((prev) => ({
