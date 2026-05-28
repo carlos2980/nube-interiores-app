@@ -314,12 +314,13 @@ const calculo = {
   type="number"
   step="0.01"
   value={medidas.ancho}
-  onInput={(e) => {
-    setMedidas((prev) => ({
-      ...prev,
-      ancho: e.currentTarget.value,
-    }));
-  }}
+  onChange={(e) => {
+  const valor = e.target.value;
+  setMedidas((prev) => ({
+    ...prev,
+    ancho: valor,
+  }));
+}}
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
@@ -330,12 +331,13 @@ const calculo = {
   type="number"
   step="0.01"
   value={medidas.alto}
-  onInput={(e) => {
-    setMedidas((prev) => ({
-      ...prev,
-      alto: e.currentTarget.value,
-    }));
-  }}
+  onChange={(e) => {
+  const valor = e.target.value;
+  setMedidas((prev) => ({
+    ...prev,
+    alto: valor,
+  }));
+}}
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
