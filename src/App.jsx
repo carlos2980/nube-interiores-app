@@ -343,39 +343,22 @@ const calculo = {
                 </div>
               </div>
 
-              {(() => {
-  const areaVista =
-    (parseFloat(medidas.ancho) || 0) *
-    (parseFloat(medidas.alto) || 0);
+              <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
+  <div className="flex justify-between">
+    <span>Área</span>
+    <strong>{areaActual.toFixed(2)} m²</strong>
+  </div>
 
-  const rendimientoVista = Number(
-    producto?.rendimiento_caja_m2 || 6.49
-  );
+  <div className="flex justify-between">
+    <span>Rendimiento por caja</span>
+    <strong>{rendimientoCaja} m²</strong>
+  </div>
 
-  const cajasVista =
-    areaVista > 0
-      ? Math.ceil(areaVista / rendimientoVista)
-      : 0;
-
-  return (
-    <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
-      <div className="flex justify-between">
-        <span>Área</span>
-        <strong>{areaVista.toFixed(2)} m²</strong>
-      </div>
-
-      <div className="flex justify-between">
-        <span>Rendimiento por caja</span>
-        <strong>{rendimientoVista} m²</strong>
-      </div>
-
-      <div className="flex justify-between">
-        <span>Cajas necesarias</span>
-        <strong>{cajasVista} cajas</strong>
-      </div>
-    </div>
-  );
-})()}
+  <div className="flex justify-between">
+    <span>Cajas necesarias</span>
+    <strong>{cajasActuales} caja{cajasActuales === 1 ? "" : "s"}</strong>
+  </div>
+</div>
 
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4">
                 <span className="font-semibold text-sm">Incluir instalación</span>
