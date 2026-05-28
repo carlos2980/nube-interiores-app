@@ -128,7 +128,10 @@ export default function App() {
     });
   }, [productos, categoria, busqueda]);
 
-  const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
+ const producto =
+  tab === "cotizador"
+    ? productoActivo || productosFiltrados[0] || productos[0] || null
+    : productoActivo || productosFiltrados[0] || productos[0] || null;
 
   const anchoNumero = Math.max(Number(ancho) || 0, 0);
   const altoNumero = Math.max(Number(alto) || 0, 0);
