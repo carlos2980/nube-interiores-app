@@ -316,23 +316,23 @@ const total = material + instalacion;
                 <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
                   <label className="text-xs text-neutral-500">Ancho</label>
                   <input
-                    type="number"
-                    step="0.01"
-                    value={ancho}
-                    onChange={(e) => setAncho(e.target.value)}
-                    className="w-full text-lg font-semibold outline-none"
-                  />
+  type="number"
+  step="0.01"
+  value={ancho}
+  onInput={(e) => setAncho(e.target.value)}
+  className="w-full text-lg font-semibold outline-none"
+/>
                 </div>
 
                 <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
                   <label className="text-xs text-neutral-500">Alto</label>
                   <input
-                    type="number"
-                    step="0.01"
-                    value={alto}
-                    onChange={(e) => setAlto(e.target.value)}
-                    className="w-full text-lg font-semibold outline-none"
-                  />
+  type="number"
+  step="0.01"
+  value={alto}
+  onInput={(e) => setAlto(e.target.value)}
+  className="w-full text-lg font-semibold outline-none"
+/>
                 </div>
               </div>
 
