@@ -46,8 +46,8 @@ export default function App() {
   const [productos, setProductos] = useState([]);
   const [productoActivo, setProductoActivo] = useState(null);
   const [medidas, setMedidas] = useState({
-    ancho: "3",
-    alto: "3.5",
+    ancho: "1",
+    alto: "1",
   });
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
