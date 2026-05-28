@@ -135,7 +135,13 @@ export default function App() {
         producto.categoria === categoria;
 
       const texto =
-        `${producto.nombre} ${producto.codigo}`.toLowerCase();
+        const texto = [
+  producto.nombre || "",
+  producto.codigo || "",
+  producto.categoria || "",
+]
+  .join(" ")
+  .toLowerCase();
 
       return (
         coincideCategoria &&
