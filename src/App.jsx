@@ -1,29 +1,109 @@
-  const [busqueda, setBusqueda] = useState("");
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  Search,
+  Home,
+  Grid2X2,
+  Calculator,
+  FileText,
+  User,
+  ShoppingCart,
+  ArrowLeft,
+} from "lucide-react";
+import { supabase } from "./supabase";
 
+const categoriasVisuales = [
+  { nombre: "Cortinas", imagen: "/categorias/cortinas.png" },
+  { nombre: "Persianas", imagen: "/categorias/persianas.png" },
+  { nombre: "Lambrín Interior", imagen: "/categorias/lambrin-interior.png" },
+  { nombre: "Lambrín Exterior", imagen: "/categorias/lambrin-exterior.png" },
+  { nombre: "Placas PVC", imagen: "/categorias/placas-pvc.png" },
+  { nombre: "Plafón PVC", imagen: "/categorias/plafon-pvc.png" },
+  { nombre: "Vigas WPC", imagen: "/categorias/vigas-wpc.png" },
+  { nombre: "Follaje Artificial", imagen: "/categorias/follaje-artificial.png" },
+  { nombre: "Pasto Artificial", imagen: "/categorias/pasto-artificial.png" },
+  { nombre: "Wall Cladding", imagen: "/categorias/wall-cladding.png" },
+  { nombre: "Papel Tapiz", imagen: "/categorias/papel-tapiz.png" },
+  { nombre: "Vegetación Artificial", imagen: "/categorias/vegetacion-artificial.png" },
+];
+
+const categorias = ["Todas", ...categoriasVisuales.map((c) => c.nombre)];
+
+function formatPrice(value) {
+  return new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+  }).format(Number(value || 0));
+}
+
+function getImagen(producto) {
+  return producto?.imagen_url || "/categorias/lambrin-interior.png";
+}
+
+function calcularLambrinCaja(ancho, alto, producto) {
+  const anchoPieza = Number(producto?.ancho_pieza_m || 0.16);
+  const largoPieza = Number(producto?.largo_pieza_m || 2.9);
+  const piezasCaja = Number(producto?.piezas_caja || 14);
+  const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
+  const rendimientoCaja = Number(producto?.rendimiento_caja_m2 || 6.49);
+
+  const area = ancho * alto;
+  const piezasPorFila = Math.ceil(ancho / anchoPieza);
+
+  let piezasTotales = piezasPorFila;
+
+  if (alto > largoPieza) {
+    const sobrante = alto - largoPieza;
+    const aprovechamiento = Math.max(Math.floor(largoPieza / sobrante), 1);
+    const piezasExtra = Math.ceil(piezasPorFila / aprovechamiento);
+    piezasTotales += piezasExtra;
+  }
+
+  const cajasPorPiezas = Math.ceil(piezasTotales / piezasCaja);
+  const cajasPorM2 = Math.ceil(area / rendimientoCaja);
+  const cajas = Math.max(cajasPorPiezas, cajasPorM2);
+
+  return {
+    area,
+    piezasPorFila,
+    piezasTotales,
+    cajas,
+    totalMaterial: cajas * precioCaja,
+  };
+}
+
+export default function App() {
+  const [tab, setTab] = useState("inicio");
+  const [categoria, setCategoria] = useState("Todas");
+  const [busqueda, setBusqueda] = useState("");
   const [productos, setProductos] = useState([]);
   const [productoActivo, setProductoActivo] = useState(null);
-
   const [ancho, setAncho] = useState(3);
   const [alto, setAlto] = useState(3.5);
-
-  const [incluirInstalacion, setIncluirInstalacion] =
-    useState(true);
+  const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
   useEffect(() => {
     cargarProductos();
   }, []);
 
   async function cargarProductos() {
-    const { data, error } = await supabase
+    let respuesta = await supabase
       .from("Productos")
       .select("*")
       .eq("activo", true);
 
-    if (error) {
-      console.error(error);
+    if (respuesta.error) {
+      respuesta = await supabase
+        .from("productos")
+        .select("*")
+        .eq("activo", true);
+    }
+
+    if (respuesta.error) {
+      console.error("Error cargando productos:", respuesta.error);
       return;
     }
 
+    const data = respuesta.data || [];
     setProductos(data);
 
     if (data.length > 0) {
@@ -34,46 +114,32 @@
   const productosFiltrados = useMemo(() => {
     return productos.filter((producto) => {
       const coincideCategoria =
-        categoria === "Todas" ||
-        producto.categoria === categoria;
+        categoria === "Todas" || producto.categoria === categoria;
 
-        const texto = [
-  producto.nombre || "",
-  producto.codigo || "",
-  producto.categoria || "",
-]
-  .join(" ")
-  .toLowerCase();
+      const texto = [
+        producto.nombre || "",
+        producto.codigo || "",
+        producto.categoria || "",
+      ]
+        .join(" ")
+        .toLowerCase();
 
-      return (
-        coincideCategoria &&
-        texto.includes(busqueda.toLowerCase())
-      );
+      return coincideCategoria && texto.includes(busqueda.toLowerCase());
     });
   }, [productos, categoria, busqueda]);
 
-  const producto =
-    productoActivo ||
-    productosFiltrados[0] ||
-    productos[0];
+  const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 
-  const anchoNumero = Number(ancho || 0);
-  const altoNumero = Number(alto || 0);
+  const anchoNumero = Math.max(Number(ancho) || 0, 0);
+  const altoNumero = Math.max(Number(alto) || 0, 0);
 
-  const esLambrinCaja =
-    producto?.tipo_calculo === "lambrin_caja";
+  const esLambrinCaja = producto?.tipo_calculo === "lambrin_caja";
 
   const calculo = esLambrinCaja
-    ? calcularLambrinCaja(
-        anchoNumero,
-        altoNumero,
-        producto
-      )
+    ? calcularLambrinCaja(anchoNumero, altoNumero, producto)
     : null;
 
-  const m2 = calculo
-    ? calculo.area
-    : anchoNumero * altoNumero;
+  const m2 = calculo ? calculo.area : anchoNumero * altoNumero;
 
   const material = calculo
     ? calculo.totalMaterial
@@ -87,46 +153,32 @@
 
   return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
-      <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative">
-
+      <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
         <div className="px-6 pt-6 pb-4 flex items-center justify-between">
           <button
-            onClick={() =>
-              tab === "producto"
-                ? setTab("catalogo")
-                : null
-            }
+            onClick={() => {
+              if (tab === "producto") setTab("catalogo");
+            }}
             className="p-2"
           >
-            {tab === "producto" ? (
-              <ArrowLeft size={22} />
-            ) : (
-              <Grid2X2 size={22} />
-            )}
+            {tab === "producto" ? <ArrowLeft size={22} /> : <Grid2X2 size={22} />}
           </button>
 
-          <h1 className="font-semibold text-lg">
-            Nube Interiores
-          </h1>
+          <h1 className="font-semibold text-lg">Nube Interiores</h1>
 
           <ShoppingCart size={22} />
         </div>
 
         <main className="px-5 pb-28">
-
           {tab === "inicio" && (
             <section className="space-y-6">
-
               <div className="flex items-center gap-3 bg-[#f1ece3] rounded-[22px] px-5 py-4">
                 <Search size={20} />
-
                 <input
                   className="bg-transparent outline-none w-full"
                   placeholder="Buscar productos..."
                   value={busqueda}
-                  onChange={(e) =>
-                    setBusqueda(e.target.value)
-                  }
+                  onChange={(e) => setBusqueda(e.target.value)}
                 />
               </div>
 
@@ -146,31 +198,22 @@
                         className="w-full h-full object-cover"
                       />
                     </div>
-
-                    <p className="text-[11px] mt-2">
-                      {cat.nombre}
-                    </p>
+                    <p className="text-[11px] mt-2">{cat.nombre}</p>
                   </button>
                 ))}
               </div>
-
             </section>
           )}
 
           {tab === "catalogo" && (
             <section className="space-y-5">
-
               <div className="flex gap-2 overflow-x-auto">
                 {categorias.map((cat) => (
                   <button
                     key={cat}
-                    onClick={() =>
-                      setCategoria(cat)
-                    }
+                    onClick={() => setCategoria(cat)}
                     className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-                      categoria === cat
-                        ? "bg-black text-white"
-                        : "bg-[#f1ece3]"
+                      categoria === cat ? "bg-black text-white" : "bg-[#f1ece3]"
                     }`}
                   >
                     {cat}
@@ -195,27 +238,19 @@
                     />
 
                     <div className="p-3 text-left">
-                      <h3 className="font-semibold text-sm">
-                        {productoItem.nombre}
-                      </h3>
-
+                      <h3 className="font-semibold text-sm">{productoItem.nombre}</h3>
                       <p className="text-xs text-neutral-500 mt-1">
-                        {formatPrice(
-                          productoItem.precio_caja ||
-                            productoItem.precio
-                        )}
+                        {formatPrice(productoItem.precio_caja || productoItem.precio)}
                       </p>
                     </div>
                   </button>
                 ))}
               </div>
-
             </section>
           )}
 
           {tab === "producto" && producto && (
             <section className="space-y-5">
-
               <img
                 src={getImagen(producto)}
                 alt={producto.nombre}
@@ -223,177 +258,128 @@
               />
 
               <div>
-                <h2 className="text-2xl font-bold">
-                  {producto.nombre}
-                </h2>
-
-                <p className="text-sm text-neutral-500">
-                  {producto.codigo}
-                </p>
+                <h2 className="text-2xl font-bold">{producto.nombre}</h2>
+                <p className="text-sm text-neutral-500">{producto.codigo}</p>
               </div>
 
               <div className="flex items-center justify-between">
-
                 <p className="text-2xl font-bold">
-                  {formatPrice(
-                    producto.precio_caja ||
-                      producto.precio
-                  )}
-
-                  <span className="text-sm font-normal">
-                    {" "}
-                    / {producto.unidad}
-                  </span>
+                  {formatPrice(producto.precio_caja || producto.precio)}
+                  <span className="text-sm font-normal"> / {producto.unidad}</span>
                 </p>
 
                 <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
                   Disponible
                 </span>
-
               </div>
 
               <div className="bg-white border border-[#e5ddd0] rounded-2xl p-4 shadow-sm">
-
-                <h3 className="font-semibold mb-2">
-                  Descripción
-                </h3>
-
+                <h3 className="font-semibold mb-2">Descripción</h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
                   {producto.descripcion}
                 </p>
-
               </div>
 
-              {producto.tipo_calculo ===
-                "lambrin_caja" && (
+              {producto.tipo_calculo === "lambrin_caja" && (
                 <div className="bg-[#f3ecdf] rounded-2xl p-4 text-sm space-y-1">
-
                   <p>
-                    <strong>
-                      Piezas por caja:
-                    </strong>{" "}
-                    {producto.piezas_caja}
+                    <strong>Piezas por caja:</strong> {producto.piezas_caja}
                   </p>
-
                   <p>
-                    <strong>
-                      Rendimiento:
-                    </strong>{" "}
-                    {
-                      producto.rendimiento_caja_m2
-                    }{" "}
-                    m²
+                    <strong>Rendimiento:</strong> {producto.rendimiento_caja_m2} m²
                   </p>
-
                 </div>
               )}
 
               <button
-                onClick={() =>
-                  setTab("cotizador")
-                }
+                onClick={() => setTab("cotizador")}
                 className="w-full bg-black text-white rounded-2xl py-4 font-semibold"
               >
                 Cotizar este producto
               </button>
-
             </section>
           )}
 
           {tab === "cotizador" && producto && (
             <section className="space-y-5">
-
               <div className="grid grid-cols-2 gap-3">
-
                 <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
-                  <label className="text-xs text-neutral-500">
-                    Ancho
-                  </label>
-
+                  <label className="text-xs text-neutral-500">Ancho</label>
                   <input
                     type="number"
+                    step="0.01"
                     value={ancho}
-                    onChange={(e) =>
-                      setAncho(e.target.value)
-                    }
+                    onChange={(e) => setAncho(e.target.value)}
                     className="w-full text-lg font-semibold outline-none"
                   />
                 </div>
 
                 <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
-                  <label className="text-xs text-neutral-500">
-                    Alto
-                  </label>
-
+                  <label className="text-xs text-neutral-500">Alto</label>
                   <input
                     type="number"
+                    step="0.01"
                     value={alto}
-                    onChange={(e) =>
-                      setAlto(e.target.value)
-                    }
+                    onChange={(e) => setAlto(e.target.value)}
                     className="w-full text-lg font-semibold outline-none"
                   />
                 </div>
-
               </div>
 
               {calculo && (
                 <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
+                  <div className="flex justify-between">
+                    <span>Área</span>
+                    <strong>{m2.toFixed(2)} m²</strong>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span>Piezas por ancho</span>
+                    <strong>{calculo.piezasPorFila} pzs</strong>
+                  </div>
 
                   <div className="flex justify-between">
                     <span>Piezas necesarias</span>
-
-                    <strong>
-                      {calculo.piezasTotales}
-                    </strong>
+                    <strong>{calculo.piezasTotales} pzs</strong>
                   </div>
 
                   <div className="flex justify-between">
                     <span>Cajas necesarias</span>
-
-                    <strong>
-                      {calculo.cajas}
-                    </strong>
+                    <strong>{calculo.cajas} cajas</strong>
                   </div>
-
                 </div>
               )}
 
-              <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
+              <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4">
+                <span className="font-semibold text-sm">Incluir instalación</span>
+                <input
+                  type="checkbox"
+                  checked={incluirInstalacion}
+                  onChange={(e) => setIncluirInstalacion(e.target.checked)}
+                />
+              </label>
 
+              <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
                 <div className="flex justify-between">
                   <span>Material</span>
-
-                  <strong>
-                    {formatPrice(material)}
-                  </strong>
+                  <strong>{formatPrice(material)}</strong>
                 </div>
 
                 <div className="flex justify-between">
                   <span>Instalación</span>
-
-                  <strong>
-                    {formatPrice(instalacion)}
-                  </strong>
+                  <strong>{formatPrice(instalacion)}</strong>
                 </div>
 
                 <div className="border-t pt-3 flex justify-between text-lg">
                   <span>Total</span>
-
-                  <strong>
-                    {formatPrice(total)}
-                  </strong>
+                  <strong>{formatPrice(total)}</strong>
                 </div>
-
               </div>
-
             </section>
           )}
-
         </main>
 
         <nav className="absolute bottom-0 left-0 right-0 bg-white border-t border-[#e5ddd0] px-4 py-4 grid grid-cols-5">
-
           <button
             onClick={() => setTab("inicio")}
             className="flex flex-col items-center text-xs"
@@ -403,9 +389,7 @@
           </button>
 
           <button
-            onClick={() =>
-              setTab("catalogo")
-            }
+            onClick={() => setTab("catalogo")}
             className="flex flex-col items-center text-xs"
           >
             <Grid2X2 size={20} />
@@ -413,9 +397,7 @@
           </button>
 
           <button
-            onClick={() =>
-              setTab("cotizador")
-            }
+            onClick={() => setTab("cotizador")}
             className="flex flex-col items-center text-xs"
           >
             <Calculator size={20} />
@@ -431,9 +413,7 @@
             <User size={20} />
             Perfil
           </button>
-
         </nav>
-
       </div>
     </div>
   );
