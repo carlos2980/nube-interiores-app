@@ -318,7 +318,7 @@ const calculo = {
     const valor = e.target.value;
     setMedidas((prev) => ({
       ...prev,
-      alto: valor,
+      ancho: valor,
     }));
   }}
   className="w-full text-lg font-semibold outline-none"
