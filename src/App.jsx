@@ -313,14 +313,14 @@ const calculo = {
                   <input
   type="number"
   step="0.01"
-  value={medidas.ancho}
+  value={medidas.alto}
   onChange={(e) => {
-  const valor = e.target.value;
-  setMedidas((prev) => ({
-    ...prev,
-    ancho: valor,
-  }));
-}}
+    const valor = e.target.value;
+    setMedidas((prev) => ({
+      ...prev,
+      alto: valor,
+    }));
+  }}
   className="w-full text-lg font-semibold outline-none"
 />
                 </div>
