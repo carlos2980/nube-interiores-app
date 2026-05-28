@@ -119,8 +119,8 @@ const [incluirInstalacion, setIncluirInstalacion] = useState(true);
     ? productoActivo || productosFiltrados[0] || productos[0] || null
     : productoActivo || productosFiltrados[0] || productos[0] || null;
 
-  const anchoNumero = Number(ancho);
-const altoNumero = Number(alto);
+  const anchoNumero = parseFloat(medidas.ancho) || 0;
+const altoNumero = parseFloat(medidas.alto) || 0;;
 
 const esLambrinCaja = producto?.tipo_calculo === "lambrin_caja";
 
