@@ -55,13 +55,17 @@ function calcularLambrinCaja(ancho, alto, producto) {
 
 export default function App() {
   const [tab, setTab] = useState("inicio");
-  const [categoria, setCategoria] = useState("Todas");
-  const [busqueda, setBusqueda] = useState("");
-  const [productos, setProductos] = useState([]);
-  const [productoActivo, setProductoActivo] = useState(null);
-  const [ancho, setAncho] = useState(3);
-  const [alto, setAlto] = useState(3.5);
-  const [incluirInstalacion, setIncluirInstalacion] = useState(true);
+const [categoria, setCategoria] = useState("Todas");
+const [busqueda, setBusqueda] = useState("");
+const [productos, setProductos] = useState([]);
+const [productoActivo, setProductoActivo] = useState(null);
+
+const [medidas, setMedidas] = useState({
+  ancho: "3",
+  alto: "3.5",
+});
+
+const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
   useEffect(() => {
     cargarProductos();
