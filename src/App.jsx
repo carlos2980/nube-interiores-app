@@ -44,7 +44,7 @@ function calcularLambrinCaja(ancho, alto, producto) {
   const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
 
   const area = ancho * alto;
-  const cajas = Math.ceil(area / rendimientoCaja);
+  const cajas = area > 0 ? Math.ceil(area / rendimientoCaja) : 0;
 
   return {
     area,
