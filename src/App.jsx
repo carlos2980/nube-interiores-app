@@ -100,43 +100,25 @@ export default function App() {
 
   const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 
-  const calculo = useMemo(() => {
-    if (!producto) {
-      return {
-        area: 0,
-        rendimientoCaja: 0,
-        cajas: 0,
-        totalMaterial: 0,
-      };
-    }
+  const anchoNumero = parseFloat(medidas.ancho) || 0;
+const altoNumero = parseFloat(medidas.alto) || 0;
+const areaActual = anchoNumero * altoNumero;
 
-    const anchoNumero = parseFloat(medidas.ancho) || 0;
-    const altoNumero = parseFloat(medidas.alto) || 0;
-    const area = anchoNumero * altoNumero;
+const rendimientoCaja = Number(producto?.rendimiento_caja_m2 || 6.49);
+const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
+const cajasActuales = areaActual > 0 ? Math.ceil(areaActual / rendimientoCaja) : 0;
 
-    if (producto.tipo_calculo === "lambrin_caja") {
-      const rendimientoCaja = Number(producto.rendimiento_caja_m2 || 6.49);
-      const precioCaja = Number(producto.precio_caja || producto.precio || 0);
-      const cajas = area > 0 ? Math.ceil(area / rendimientoCaja) : 0;
-
-      return {
-        area,
-        rendimientoCaja,
-        cajas,
-        totalMaterial: cajas * precioCaja,
-      };
-    }
-
-    return {
-      area,
-      rendimientoCaja: null,
-      cajas: null,
-      totalMaterial: area * Number(producto.precio || 0),
-    };
-  }, [medidas.ancho, medidas.alto, producto]);
-
-  const m2 = calculo.area || 0;
+const calculo = {
+  area: areaActual,
+  rendimientoCaja,
+  cajas: producto?.tipo_calculo === "lambrin_caja" ? cajasActuales : null,
+  totalMaterial:
+    producto?.tipo_calculo === "lambrin_caja"
+      ? cajasActuales * precioCaja
+      : areaActual * Number(producto?.precio || 0),
+};
   const material = calculo.totalMaterial || 0;
+  const m2 = calculo.area || 0;
 
   const instalacion = incluirInstalacion
     ? m2 * Number(producto?.instalacion || 0)
