@@ -40,32 +40,14 @@ function getImagen(producto) {
 }
 
 function calcularLambrinCaja(ancho, alto, producto) {
-  const anchoPieza = Number(producto?.ancho_pieza_m || 0.16);
-  const largoPieza = Number(producto?.largo_pieza_m || 2.9);
-  const piezasCaja = Number(producto?.piezas_caja || 14);
-  const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
   const rendimientoCaja = Number(producto?.rendimiento_caja_m2 || 6.49);
+  const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
 
   const area = ancho * alto;
-  const piezasPorFila = Math.ceil(ancho / anchoPieza);
-
-  let piezasTotales = piezasPorFila;
-
-  if (alto > largoPieza) {
-    const sobrante = alto - largoPieza;
-    const aprovechamiento = Math.max(Math.floor(largoPieza / sobrante), 1);
-    const piezasExtra = Math.ceil(piezasPorFila / aprovechamiento);
-    piezasTotales += piezasExtra;
-  }
-
-  const cajasPorPiezas = Math.ceil(piezasTotales / piezasCaja);
-  const cajasPorM2 = Math.ceil(area / rendimientoCaja);
-  const cajas = Math.max(cajasPorPiezas, cajasPorM2);
+  const cajas = Math.ceil(area / rendimientoCaja);
 
   return {
     area,
-    piezasPorFila,
-    piezasTotales,
     cajas,
     totalMaterial: cajas * precioCaja,
   };
