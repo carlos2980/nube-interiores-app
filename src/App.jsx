@@ -138,9 +138,18 @@ export default function App() {
 
   const esLambrinCaja = producto?.tipo_calculo === "lambrin_caja";
 
-  const calculo = esLambrinCaja
+  const calculo = useMemo(() => {
+  if (!producto) return null;
+
+  return esLambrinCaja
     ? calcularLambrinCaja(anchoNumero, altoNumero, producto)
     : null;
+}, [
+  anchoNumero,
+  altoNumero,
+  producto,
+  esLambrinCaja,
+]);
 
   const m2 = calculo ? calculo.area : anchoNumero * altoNumero;
 
