@@ -115,35 +115,45 @@ export default function App() {
     ? productoActivo || productosFiltrados[0] || productos[0] || null
     : productoActivo || productosFiltrados[0] || productos[0] || null;
 
-  const anchoNumero = Math.max(Number(ancho) || 0, 0);
-  const altoNumero = Math.max(Number(alto) || 0, 0);
+  const anchoNumero = Number(ancho);
+const altoNumero = Number(alto);
 
-  const esLambrinCaja = producto?.tipo_calculo === "lambrin_caja";
+const esLambrinCaja = producto?.tipo_calculo === "lambrin_caja";
 
-  const calculo = useMemo(() => {
+const calculo = useMemo(() => {
   if (!producto) return null;
 
-  return esLambrinCaja
-    ? calcularLambrinCaja(anchoNumero, altoNumero, producto)
-    : null;
-}, [
-  anchoNumero,
-  altoNumero,
-  producto,
-  esLambrinCaja,
-]);
+  const area = anchoNumero * altoNumero;
 
-  const m2 = calculo ? calculo.area : anchoNumero * altoNumero;
+  if (producto.tipo_calculo === "lambrin_caja") {
+    const rendimientoCaja = Number(producto.rendimiento_caja_m2 || 6.49);
+    const precioCaja = Number(producto.precio_caja || producto.precio || 0);
+    const cajas = area > 0 ? Math.ceil(area / rendimientoCaja) : 0;
 
-  const material = calculo
-    ? calculo.totalMaterial
-    : m2 * Number(producto?.precio || 0);
+    return {
+      area,
+      rendimientoCaja,
+      cajas,
+      totalMaterial: cajas * precioCaja,
+    };
+  }
 
-  const instalacion = incluirInstalacion
-    ? m2 * Number(producto?.instalacion || 0)
-    : 0;
+  return {
+    area,
+    rendimientoCaja: null,
+    cajas: null,
+    totalMaterial: area * Number(producto.precio || 0),
+  };
+}, [ancho, alto, producto]);
 
-  const total = material + instalacion;
+const m2 = calculo?.area || 0;
+const material = calculo?.totalMaterial || 0;
+
+const instalacion = incluirInstalacion
+  ? m2 * Number(producto?.instalacion || 0)
+  : 0;
+
+const total = material + instalacion;
 
   return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
