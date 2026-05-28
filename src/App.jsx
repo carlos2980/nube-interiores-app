@@ -37,7 +37,6 @@
         categoria === "Todas" ||
         producto.categoria === categoria;
 
-      const texto =
         const texto = [
   producto.nombre || "",
   producto.codigo || "",
