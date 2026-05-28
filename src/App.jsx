@@ -118,11 +118,10 @@ const calculo = {
       : areaActual * Number(producto?.precio || 0),
 };
   const material = calculo.totalMaterial || 0;
-  const m2 = calculo.area || 0;
 
   const instalacion = incluirInstalacion
-    ? m2 * Number(producto?.instalacion || 0)
-    : 0;
+  ? areaActual * Number(producto?.instalacion || 0)
+  : 0;
 
   const total = material + instalacion;
 
