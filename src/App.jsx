@@ -392,14 +392,19 @@ const calculo = {
   </div>
 
   <div className="flex justify-between">
-    <span>Rendimiento por caja</span>
-    <strong>{rendimientoCaja} m²</strong>
-  </div>
+  <span>
+    {producto?.tipo_calculo === "papel-tapiz_rollo"
+      ? "Rollos necesarios"
+      : "Cajas necesarias"}
+  </span>
 
-  <div className="flex justify-between">
-    <span>Cajas necesarias</span>
-    <strong>{cajasActuales} caja{cajasActuales === 1 ? "" : "s"}</strong>
-  </div>
+  <strong>
+  {producto?.tipo_calculo === "papel-tapiz_rollo"
+    ? `${rollosActuales} rollo${rollosActuales === 1 ? "" : "s"}`
+    : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`
+  }
+</strong>
+</div>
 </div>
 
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4">
