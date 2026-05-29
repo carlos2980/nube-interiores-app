@@ -46,6 +46,7 @@ function getImagenes(producto) {
     producto?.imagen_2,
     producto?.imagen_3,
     producto?.imagen_4,
+    producto?.imagen_5,
   ].filter(Boolean);
 }
 export default function App() {
