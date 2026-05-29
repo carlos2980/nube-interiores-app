@@ -265,16 +265,21 @@ const calculo = {
 
           {tab === "producto" && producto && (
             <section className="space-y-5">
-              <img
-                src={getImagen(producto)}
-                alt={producto.nombre}
-                className="w-full h-72 object-cover rounded-3xl"
-              />
+             <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2">
+  {getImagenes(producto).map((imagen, index) => (
+    <img
+      key={index}
+      src={imagen}
+      alt={`${producto.nombre} ${index + 1}`}
+      className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center"
+    />
+  ))}
+</div>
 
-              <div>
-                <h2 className="text-2xl font-bold">{producto.nombre}</h2>
-                <p className="text-sm text-neutral-500">{producto.codigo}</p>
-              </div>
+<div>
+  <h2 className="text-2xl font-bold">{producto.nombre}</h2>
+  <p className="text-sm text-neutral-500">{producto.codigo}</p>
+</div>
 
               <div className="flex items-center justify-between">
                 <p className="text-2xl font-bold">
