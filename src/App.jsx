@@ -157,7 +157,9 @@ const calculo = {
   const material = calculo.totalMaterial || 0;
 
   const instalacion = incluirInstalacion
-  ? areaActual * Number(producto?.instalacion || 0)
+  ? producto?.tipo_calculo === "papel-tapiz_rollo"
+    ? rollosActuales * Number(producto?.instalacion || 0)
+    : areaActual * Number(producto?.instalacion || 0)
   : 0;
 
   const total = material + instalacion;
