@@ -24,6 +24,7 @@ const categoriasVisuales = [
   { nombre: "Wall Cladding", imagen: "/categorias/wall-cladding.png" },
   { nombre: "Papel Tapiz", imagen: "/categorias/papel-tapiz.png" },
   { nombre: "Vegetación Artificial", imagen: "/categorias/vegetacion-artificial.png" },
+  { nombre: "Pisos SPC", imagen: "/categorias/piso-spc.png" },
 ];
 
 const categorias = ["Todas", ...categoriasVisuales.map((c) => c.nombre)];
