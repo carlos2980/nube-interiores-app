@@ -156,13 +156,15 @@ const calculo = {
 };
   const material = calculo.totalMaterial || 0;
 
-  const instalacion = incluirInstalacion
+console.log("TIPO:", producto?.tipo_calculo);
+
+const instalacion = incluirInstalacion
   ? producto?.tipo_calculo === "papel-tapiz_rollo"
     ? rollosActuales * Number(producto?.instalacion || 0)
     : areaActual * Number(producto?.instalacion || 0)
   : 0;
 
-  const total = material + instalacion;
+const total = material + instalacion;
 
   return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
