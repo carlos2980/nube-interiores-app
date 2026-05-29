@@ -40,7 +40,14 @@ function formatPrice(value) {
 function getImagen(producto) {
   return producto?.imagen_url || "/categorias/lambrin-interior.png";
 }
-
+function getImagenes(producto) {
+  return [
+    producto?.imagen_url,
+    producto?.imagen_2,
+    producto?.imagen_3,
+    producto?.imagen_4,
+  ].filter(Boolean);
+}
 export default function App() {
   const [tab, setTab] = useState("inicio");
   const [categoria, setCategoria] = useState("Todas");
