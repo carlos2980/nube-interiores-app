@@ -378,6 +378,38 @@ Enviado desde la App de Nube Interiores.
               </div>
             </section>
           )}
+          {tab === "grupos" && (
+  <section className="space-y-5">
+
+    <div>
+      <h2 className="text-2xl font-bold">
+        Cat-Textura
+      </h2>
+
+      <p className="text-sm text-neutral-500">
+        Selecciona un grupo
+      </p>
+    </div>
+
+    <div className="grid grid-cols-2 gap-3">
+      {grupos.map((grupo) => (
+        <button
+          key={grupo}
+          onClick={() => {
+            setGrupoActivo(grupo);
+            setTab("modelos");
+          }}
+          className="bg-white rounded-3xl border border-[#e5ddd0] p-5 shadow-sm"
+        >
+          <p className="font-semibold text-lg">
+            {grupo}
+          </p>
+        </button>
+      ))}
+    </div>
+
+  </section>
+)}
 {tab === "modelos" && productoActivo && (
   <section className="space-y-5">
 
