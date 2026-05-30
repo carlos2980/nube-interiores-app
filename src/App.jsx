@@ -167,7 +167,35 @@ const instalacion = incluirInstalacion
   : 0;
 
 const total = material + instalacion;
+function enviarWhatsApp() {
+  const mensaje = `
+Hola, me interesa el siguiente producto:
 
+Producto: ${producto?.nombre}
+Código: ${producto?.codigo}
+
+Medidas:
+Ancho: ${anchoNumero} m
+Alto: ${altoNumero} m
+
+${
+  producto?.tipo_calculo === "papel-tapiz_rollo"
+    ? `Rollos: ${rollosActuales}`
+    : `Cantidad: ${calculo.cajas || areaActual.toFixed(2)}`
+}
+
+Material: ${formatPrice(material)}
+Instalación: ${formatPrice(instalacion)}
+Total: ${formatPrice(total)}
+
+Enviado desde la App de Nube Interiores.
+`;
+
+  window.open(
+    `https://wa.me/526862321867?text=${encodeURIComponent(mensaje)}`,
+    "_blank"
+  );
+}
   return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
       <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
