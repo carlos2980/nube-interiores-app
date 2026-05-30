@@ -366,8 +366,8 @@ Enviado desde la App de Nube Interiores.
 </h2>
 
       <p className="text-sm text-neutral-500">
-        Selecciona un modelo
-      </p>
+  {productoMostrado.codigo}
+</p>
     </div>
 
     <div className="grid grid-cols-2 gap-3">
