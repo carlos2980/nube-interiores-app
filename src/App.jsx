@@ -466,9 +466,19 @@ Enviado desde la App de Nube Interiores.
                   <strong>{formatPrice(total)}</strong>
                 </div>
               </div>
-            </section>
-          )}
-        </main>
+              <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
+</div>
+
+<button
+  onClick={enviarWhatsApp}
+  className="w-full bg-[#25D366] text-white font-semibold py-4 rounded-2xl mt-4 shadow-md"
+>
+  💬 Solicitar cotización por WhatsApp
+</button>
+
+</section>
+)}
+</main>
 
         <nav className="absolute bottom-0 left-0 right-0 bg-white border-t border-[#e5ddd0] px-4 py-4 grid grid-cols-5">
           <button onClick={() => setTab("inicio")} className="flex flex-col items-center text-xs">
