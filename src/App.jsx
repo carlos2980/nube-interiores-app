@@ -362,8 +362,8 @@ Enviado desde la App de Nube Interiores.
 
     <div>
       <h2 className="text-2xl font-bold">
-        {productoMostrado.nombre}
-      </h2>
+  {productoMostrado.nombre}
+</h2>
 
       <p className="text-sm text-neutral-500">
         Selecciona un modelo
