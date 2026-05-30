@@ -468,11 +468,12 @@ Enviado desde la App de Nube Interiores.
              <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2">
   {getImagenes(productoMostrado).map((imagen, index) => (
     <img
-      key={index}
-      src={imagen}
-      alt={`${productoMostrado.nombre} ${index + 1}`}
-      className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center"
-    />
+  key={index}
+  src={imagen}
+  alt={`${productoMostrado.nombre} ${index + 1}`}
+  onClick={() => setImagenZoom(imagen)}
+  className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center cursor-zoom-in"
+/>
   ))}
 </div>
 
