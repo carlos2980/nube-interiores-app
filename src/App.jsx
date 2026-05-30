@@ -203,8 +203,8 @@ function enviarWhatsApp() {
   const mensaje = `
 Hola, me interesa el siguiente producto:
 
-Producto: ${producto?.nombre}
-Código: ${producto?.codigo}
+Producto: ${productoMostrado?.nombre}
+Código: ${productoMostrado?.codigo}
 
 Medidas:
 Ancho: ${anchoNumero} m
