@@ -420,7 +420,11 @@ Enviado desde la App de Nube Interiores.
 
               <div className="flex items-center justify-between">
                 <p className="text-2xl font-bold">
-                  {formatPrice(productoMostrado.precio_caja || productoMostrado.precio)}
+                  {formatPrice(
+  productoMostrado.precio_rollo ||
+  productoMostrado.precio_caja ||
+  productoMostrado.precio
+)}
                   <span className="text-sm font-normal"> / {productoMostrado.unidad}</span>
                 </p>
 
