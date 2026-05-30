@@ -142,14 +142,14 @@ const productoCalculo = productoMostrado || producto;
 const altoNumero = parseFloat(medidas.alto) || 0;
 const areaActual = anchoNumero * altoNumero;
 
-const rendimientoCaja = Number(producto?.rendimiento_caja_m2 || 6.49);
-const precioCaja = Number(producto?.precio_caja || producto?.precio || 0);
+const rendimientoCaja = Number(productoCalculo?.rendimiento_caja_m2 || 6.49);
+const precioCaja = Number(productoCalculo?.precio_caja || productoCalculo?.precio || 0);
 const cajasActuales = areaActual > 0 ? Math.ceil(areaActual / rendimientoCaja) : 0;
-const esPapelTapiz = producto?.tipo_calculo === "papel-tapiz_rollo";
+const esPapelTapiz = productoCalculo?.tipo_calculo === "papel-tapiz_rollo";
 
-const anchoRollo = Number(producto?.ancho_pieza_m || 0.53);
-const largoRollo = Number(producto?.largo_pieza_m || 10.05);
-const precioRollo = Number(producto?.precio_rollo || producto?.precio || 0);
+const anchoRollo = Number(productoCalculo?.ancho_pieza_m || 0.53);
+const largoRollo = Number(productoCalculo?.largo_pieza_m || 10.05);
+const precioRollo = Number(productoCalculo?.precio_rollo || producto?.precio || 0);
 
 const pliegosPorRollo =
   esPapelTapiz && altoNumero > 0
@@ -167,30 +167,30 @@ const calculo = {
   rendimientoCaja,
 
   cajas:
-    producto?.tipo_calculo === "lambrin_caja"
+    productoCalculo?.tipo_calculo === "lambrin_caja"
       ? cajasActuales
       : null,
 
   rollos:
-    producto?.tipo_calculo === "papel-tapiz_rollo"
+    productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
       ? rollosActuales
       : null,
 
   totalMaterial:
-    producto?.tipo_calculo === "lambrin_caja"
+    productoCalculo?.tipo_calculo === "lambrin_caja"
       ? cajasActuales * precioCaja
-      : producto?.tipo_calculo === "papel-tapiz_rollo"
+      : productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
       ? rollosActuales * precioRollo
-      : areaActual * Number(producto?.precio || 0),
+      : areaActual * Number(productoCalculo?.precio || 0),
 };
   const material = calculo.totalMaterial || 0;
 
-console.log("TIPO:", producto?.tipo_calculo);
+console.log("TIPO:", productoCalculo?.tipo_calculo);
 
 const instalacion = incluirInstalacion
-  ? producto?.tipo_calculo === "papel-tapiz_rollo"
-    ? rollosActuales * Number(producto?.instalacion || 0)
-    : areaActual * Number(producto?.instalacion || 0)
+  ? productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+    ? rollosActuales * Number(productoCalculo?.instalacion || 0)
+    : areaActual * Number(productoCalculo?.instalacion || 0)
   : 0;
 
 const total = material + instalacion;
