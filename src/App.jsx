@@ -414,13 +414,13 @@ Enviado desde la App de Nube Interiores.
 
 <div>
   <h2 className="text-2xl font-bold">{productoMostrado.nombre}</h2>
-  <p className="text-sm text-neutral-500">{producto.codigo}</p>
+  <p className="text-sm text-neutral-500">{productoMostrado.codigo}</p>
 </div>
 
               <div className="flex items-center justify-between">
                 <p className="text-2xl font-bold">
-                  {formatPrice(producto.precio_caja || producto.precio)}
-                  <span className="text-sm font-normal"> / {producto.unidad}</span>
+                  {formatPrice(productoMostrado.precio_caja || productoMostrado.precio)}
+                  <span className="text-sm font-normal"> / {productoMostrado.unidad}</span>
                 </p>
 
                 <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
@@ -431,17 +431,17 @@ Enviado desde la App de Nube Interiores.
               <div className="bg-white border border-[#e5ddd0] rounded-2xl p-4 shadow-sm">
                 <h3 className="font-semibold mb-2">Descripción</h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  {producto.descripcion}
+                  {productoMostrado.descripcion}
                 </p>
               </div>
 
-              {producto.tipo_calculo === "lambrin_caja" && (
+              {productoMostrado.tipo_calculo === "lambrin_caja" && (
                 <div className="bg-[#f3ecdf] rounded-2xl p-4 text-sm space-y-1">
                   <p>
-                    <strong>Piezas por caja:</strong> {producto.piezas_caja}
+                    <strong>Piezas por caja:</strong> {productoMostrado.piezas_caja}
                   </p>
                   <p>
-                    <strong>Rendimiento:</strong> {producto.rendimiento_caja_m2} m²
+                    <strong>Rendimiento:</strong> {productoMostrado.rendimiento_caja_m2} m²
                   </p>
                 </div>
               )}
