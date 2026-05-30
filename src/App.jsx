@@ -406,7 +406,7 @@ Enviado desde la App de Nube Interiores.
     <img
       key={index}
       src={imagen}
-      alt={`${producto.nombre} ${index + 1}`}
+      alt={`${productoMostrado.nombre} ${index + 1}`}
       className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center"
     />
   ))}
