@@ -449,7 +449,7 @@ Enviado desde la App de Nube Interiores.
             </section>
           )}
 
-          {tab === "cotizador" && producto && (
+          {tab === "cotizador" && productoCalculo && (
             <section className="space-y-5">
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
