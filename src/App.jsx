@@ -475,6 +475,18 @@ Enviado desde la App de Nube Interiores.
   className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center cursor-zoom-in"
 />
   ))}
+               {imagenZoom && (
+  <div
+    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+    onClick={() => setImagenZoom(null)}
+  >
+    <img
+      src={imagenZoom}
+      alt="Zoom"
+      className="max-w-full max-h-full object-contain"
+    />
+  </div>
+)}
 </div>
 
 <div>
