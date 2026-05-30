@@ -324,9 +324,16 @@ Enviado desde la App de Nube Interiores.
                   <button
                     key={productoItem.id}
                     onClick={() => {
-                      setProductoActivo(productoItem);
-                      setTab("producto");
-                    }}
+  setProductoActivo(productoItem);
+  setModeloActivo(null);
+
+  if (productoItem.nombre === "Cat-Textura") {
+    cargarModelos(productoItem.id);
+    setTab("modelos");
+  } else {
+    setTab("producto");
+  }
+}}
                     className="rounded-3xl overflow-hidden border border-[#e5ddd0] bg-white shadow-md"
                   >
                     <img
