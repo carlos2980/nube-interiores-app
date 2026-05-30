@@ -354,7 +354,6 @@ Enviado desde la App de Nube Interiores.
   setGrupoActivo(null);
   setModeloActivo(null);
   setTab("grupos");
-}
   } else {
     setTab("producto");
   }
