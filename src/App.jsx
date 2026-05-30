@@ -126,6 +126,11 @@ const [medidas, setMedidas] = useState({
 
 const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 const productoMostrado = modeloActivo || producto;
+  const grupos = [...new Set(modelos.map((m) => m.grupo).filter(Boolean))];
+
+const modelosFiltrados = grupoActivo
+  ? modelos.filter((m) => m.grupo === grupoActivo)
+  : modelos;
 const productoCalculo = modeloActivo
   ? {
       ...producto,
