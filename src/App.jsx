@@ -353,8 +353,49 @@ Enviado desde la App de Nube Interiores.
               </div>
             </section>
           )}
+{tab === "modelos" && productoActivo && (
+  <section className="space-y-5">
 
-          {tab === "producto" && producto && (
+    <div>
+      <h2 className="text-2xl font-bold">
+        {productoActivo.nombre}
+      </h2>
+
+      <p className="text-sm text-neutral-500">
+        Selecciona un modelo
+      </p>
+    </div>
+
+    <div className="grid grid-cols-2 gap-3">
+
+      {modelos.map((modelo) => (
+        <button
+          key={modelo.id}
+          onClick={() => {
+            setModeloActivo(modelo);
+            setTab("producto");
+          }}
+          className="bg-white rounded-3xl overflow-hidden shadow-md border border-[#e5ddd0]"
+        >
+          <img
+            src={modelo.imagen_url}
+            alt={modelo.nombre}
+            className="w-full h-32 object-cover"
+          />
+
+          <div className="p-3 text-left">
+            <p className="font-semibold">
+              {modelo.codigo}
+            </p>
+          </div>
+        </button>
+      ))}
+
+    </div>
+
+  </section>
+)}
+          {tab === "producto" && productoMostrado && (
             <section className="space-y-5">
              <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2">
   {getImagenes(producto).map((imagen, index) => (
