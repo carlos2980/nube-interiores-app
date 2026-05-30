@@ -125,7 +125,17 @@ const [medidas, setMedidas] = useState({
 
 const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 const productoMostrado = modeloActivo || producto;
-const productoCalculo = productoMostrado;
+const productoCalculo = modeloActivo
+  ? {
+      ...producto,
+      ...modeloActivo,
+      tipo_calculo: modeloActivo.tipo_calculo || producto.tipo_calculo,
+      ancho_pieza_m: modeloActivo.ancho_pieza_m || producto.ancho_pieza_m,
+      largo_pieza_m: modeloActivo.largo_pieza_m || producto.largo_pieza_m,
+      instalacion: modeloActivo.instalacion || producto.instalacion,
+      unidad: modeloActivo.unidad || producto.unidad,
+    }
+  : producto;
 
   const anchoNumero = parseFloat(medidas.ancho) || 0;
 const altoNumero = parseFloat(medidas.alto) || 0;
