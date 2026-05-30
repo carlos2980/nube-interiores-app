@@ -349,9 +349,12 @@ Enviado desde la App de Nube Interiores.
   setProductoActivo(productoItem);
   setModeloActivo(null);
 
-  if (productoItem.nombre === "Cat-Textura") {
-    cargarModelos(productoItem.id);
-    setTab("modelos");
+ if (productoItem.nombre === "Cat-Textura") {
+  cargarModelos(productoItem.id);
+  setGrupoActivo(null);
+  setModeloActivo(null);
+  setTab("grupos");
+}
   } else {
     setTab("producto");
   }
