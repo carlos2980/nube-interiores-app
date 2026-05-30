@@ -94,7 +94,6 @@ const [medidas, setMedidas] = useState({
     .from("Modelos")
     .select("*")
     .eq("producto_id", productoId)
-    .eq("activo", true);
 
   console.log("Producto ID:", productoId);
   console.log("Modelos encontrados:", data);
