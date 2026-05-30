@@ -240,7 +240,11 @@ Enviado desde la App de Nube Interiores.
 }}
             className="p-2"
           >
-            {tab === "producto" ? <ArrowLeft size={22} /> : <Grid2X2 size={22} />}
+            {tab === "producto" || tab === "modelos" ? (
+  <ArrowLeft size={22} />
+) : (
+  <Grid2X2 size={22} />
+)}
           </button>
 
           <h1 className="font-semibold text-lg">Nube Interiores</h1>
