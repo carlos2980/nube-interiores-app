@@ -59,6 +59,7 @@ const [productoActivo, setProductoActivo] = useState(null);
 
 const [modelos, setModelos] = useState([]);
 const [modeloActivo, setModeloActivo] = useState(null);
+  const [grupoActivo, setGrupoActivo] = useState(null);
 
 const [medidas, setMedidas] = useState({
   ancho: "1",
