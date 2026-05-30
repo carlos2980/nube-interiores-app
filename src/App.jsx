@@ -195,7 +195,7 @@ Ancho: ${anchoNumero} m
 Alto: ${altoNumero} m
 
 ${
-  producto?.tipo_calculo === "papel-tapiz_rollo"
+  productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? `Rollos: ${rollosActuales}`
     : `Cantidad: ${calculo.cajas || areaActual.toFixed(2)}`
 }
@@ -495,13 +495,13 @@ Enviado desde la App de Nube Interiores.
 
   <div className="flex justify-between">
   <span>
-    {producto?.tipo_calculo === "papel-tapiz_rollo"
+    {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
       ? "Rollos necesarios"
       : "Cajas necesarias"}
   </span>
 
   <strong>
-  {producto?.tipo_calculo === "papel-tapiz_rollo"
+  {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? `${rollosActuales} rollo${rollosActuales === 1 ? "" : "s"}`
     : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`
   }
