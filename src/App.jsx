@@ -349,7 +349,7 @@ Enviado desde la App de Nube Interiores.
   setProductoActivo(productoItem);
   setModeloActivo(null);
 
- if (productoItem.nombre === "Cat-Textura") {
+ if (productoItem.nombre.startsWith("CATALAGO-")) {
   cargarModelos(productoItem.id);
   setGrupoActivo(null);
   setModeloActivo(null);
