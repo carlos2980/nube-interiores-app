@@ -65,7 +65,6 @@ const [medidas, setMedidas] = useState({
   alto: "1",
 });
 
-const productoMostrado = modeloActivo || productoActivo;
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
   useEffect(() => {
@@ -135,8 +134,9 @@ const productoMostrado = modeloActivo || productoActivo;
     });
   }, [productos, categoria, busqueda]);
 
-  const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
-const productoCalculo = productoMostrado || producto;
+const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
+const productoMostrado = modeloActivo || producto;
+const productoCalculo = productoMostrado;
 
   const anchoNumero = parseFloat(medidas.ancho) || 0;
 const altoNumero = parseFloat(medidas.alto) || 0;
