@@ -149,7 +149,7 @@ const esPapelTapiz = productoCalculo?.tipo_calculo === "papel-tapiz_rollo";
 
 const anchoRollo = Number(productoCalculo?.ancho_pieza_m || 0.53);
 const largoRollo = Number(productoCalculo?.largo_pieza_m || 10.05);
-const precioRollo = Number(productoCalculo?.precio_rollo || producto?.precio || 0);
+const precioRollo = Number(productoCalculo?.precio_rollo || productoCalculo?.precio || 0);
 
 const pliegosPorRollo =
   esPapelTapiz && altoNumero > 0
