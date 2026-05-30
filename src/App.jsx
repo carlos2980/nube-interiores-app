@@ -261,7 +261,7 @@ Enviado desde la App de Nube Interiores.
           {tab === "inicio" && (
             <section className="space-y-6">
               <div className="text-center pt-4">
-                <img src="/logo.png" alt="Nube Interiores" className="w-44 mx-auto" />
+                <img src={logo} alt="Nube Interiores" className="w-44 mx-auto object-contain" />
                 <h2 className="text-3xl font-bold mt-6">¡Bienvenido!</h2>
                 <p className="text-neutral-500 mt-1">
                   Inspírate, elige y cotiza tus acabados.
