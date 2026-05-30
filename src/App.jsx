@@ -55,13 +55,17 @@ export default function App() {
   const [categoria, setCategoria] = useState("Todas");
   const [busqueda, setBusqueda] = useState("");
   const [productos, setProductos] = useState([]);
-  const [productoActivo, setProductoActivo] = useState(null);
-  const [modelos, setModelos] = useState([]);
+const [productoActivo, setProductoActivo] = useState(null);
+
+const [modelos, setModelos] = useState([]);
 const [modeloActivo, setModeloActivo] = useState(null);
-  const [medidas, setMedidas] = useState({
-    ancho: "1",
-    alto: "1",
-  });
+
+const [medidas, setMedidas] = useState({
+  ancho: "1",
+  alto: "1",
+});
+
+const productoMostrado = modeloActivo || productoActivo;
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
   useEffect(() => {
