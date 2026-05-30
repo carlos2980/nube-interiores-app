@@ -382,7 +382,7 @@ Enviado desde la App de Nube Interiores.
 
     <div>
       <h2 className="text-2xl font-bold">
-        Cat-Textura
+        {productoActivo?.nombre || "Catálogo"}
       </h2>
 
       <p className="text-sm text-neutral-500">
