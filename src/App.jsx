@@ -402,7 +402,7 @@ Enviado desde la App de Nube Interiores.
           {tab === "producto" && productoMostrado && (
             <section className="space-y-5">
              <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2">
-  {getImagenes(producto).map((imagen, index) => (
+  {getImagenes(productoMostrado).map((imagen, index) => (
     <img
       key={index}
       src={imagen}
