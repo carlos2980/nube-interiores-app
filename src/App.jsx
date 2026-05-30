@@ -425,7 +425,7 @@ Enviado desde la App de Nube Interiores.
 
     <div className="grid grid-cols-2 gap-3">
 
-      {modelos.map((modelo) => (
+      {modelosFiltrados.map((modelo) => (
         <button
           key={modelo.id}
           onClick={() => {
