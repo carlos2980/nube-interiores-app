@@ -228,8 +228,16 @@ Enviado desde la App de Nube Interiores.
         <div className="px-6 pt-6 pb-4 flex items-center justify-between">
           <button
             onClick={() => {
-              if (tab === "producto") setTab("catalogo");
-            }}
+  if (tab === "producto") {
+    if (modeloActivo) {
+      setTab("modelos");
+    } else {
+      setTab("catalogo");
+    }
+  } else if (tab === "modelos") {
+    setTab("catalogo");
+  }
+}}
             className="p-2"
           >
             {tab === "producto" ? <ArrowLeft size={22} /> : <Grid2X2 size={22} />}
