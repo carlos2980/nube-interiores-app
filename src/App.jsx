@@ -104,19 +104,6 @@ const [medidas, setMedidas] = useState({
   setModelos(data || []);
 }
 
-    if (respuesta.error) {
-      console.error("Error cargando productos:", respuesta.error);
-      return;
-    }
-
-    const data = respuesta.data || [];
-    setProductos(data);
-
-    if (data.length > 0) {
-      setProductoActivo(data[0]);
-    }
-  }
-
   const productosFiltrados = useMemo(() => {
     return productos.filter((producto) => {
       const coincideCategoria =
