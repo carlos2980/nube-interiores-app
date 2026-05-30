@@ -56,6 +56,8 @@ export default function App() {
   const [busqueda, setBusqueda] = useState("");
   const [productos, setProductos] = useState([]);
   const [productoActivo, setProductoActivo] = useState(null);
+  const [modelos, setModelos] = useState([]);
+const [modeloActivo, setModeloActivo] = useState(null);
   const [medidas, setMedidas] = useState({
     ancho: "1",
     alto: "1",
