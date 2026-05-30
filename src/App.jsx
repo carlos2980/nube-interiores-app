@@ -393,17 +393,29 @@ Enviado desde la App de Nube Interiores.
     <div className="grid grid-cols-2 gap-3">
       {grupos.map((grupo) => (
         <button
-          key={grupo}
-          onClick={() => {
-            setGrupoActivo(grupo);
-            setTab("modelos");
-          }}
-          className="bg-white rounded-3xl border border-[#e5ddd0] p-5 shadow-sm"
-        >
-          <p className="font-semibold text-lg">
-            {grupo}
-          </p>
-        </button>
+  key={grupo}
+  onClick={() => {
+    setGrupoActivo(grupo);
+    setTab("modelos");
+  }}
+  className="bg-white rounded-3xl overflow-hidden border border-[#e5ddd0] shadow-sm text-left"
+>
+  <img
+    src={modelos.find((m) => m.grupo === grupo)?.imagen_url}
+    alt={grupo}
+    className="w-full h-28 object-cover"
+  />
+
+  <div className="p-4">
+    <p className="font-semibold text-lg">
+      {grupo}
+    </p>
+
+    <p className="text-xs text-neutral-500">
+      {modelos.filter((m) => m.grupo === grupo).length} modelos
+    </p>
+  </div>
+</button>
       ))}
     </div>
 
