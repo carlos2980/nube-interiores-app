@@ -69,17 +69,37 @@ const [modeloActivo, setModeloActivo] = useState(null);
   }, []);
 
   async function cargarProductos() {
-    let respuesta = await supabase
-      .from("Productos")
+
+  let respuesta = await supabase
+    .from("Productos")
+    .select("*")
+    .eq("activo", true);
+
+  if (respuesta.error) {
+    respuesta = await supabase
+      .from("productos")
       .select("*")
       .eq("activo", true);
+  }
 
-    if (respuesta.error) {
-      respuesta = await supabase
-        .from("productos")
-        .select("*")
-        .eq("activo", true);
-    }
+  if (!respuesta.error) {
+    setProductos(respuesta.data || []);
+  }
+}
+   async function cargarModelos(productoId) {
+  const { data, error } = await supabase
+    .from("Modelos")
+    .select("*")
+    .eq("producto_id", productoId)
+    .eq("activo", true);
+
+  if (error) {
+    console.error("Error cargando modelos:", error);
+    return;
+  }
+
+  setModelos(data || []);
+}
 
     if (respuesta.error) {
       console.error("Error cargando productos:", respuesta.error);
