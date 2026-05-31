@@ -113,13 +113,67 @@ const [medidas, setMedidas] = useState({
       const coincideCategoria =
         categoria === "Todas" || producto.categoria === categoria;
 
-      const texto = [
-        producto.nombre || "",
-        producto.codigo || "",
-        producto.categoria || "",
-      ]
-        .join(" ")
-        .toLowerCase();
+      const sinonimos = {
+  "placa pvc": "placas pvc placa pvc marmol mármol onix ónix arena grafito muro pared recubrimiento",
+  "placas pvc": "placas pvc placa pvc marmol mármol onix ónix arena grafito muro pared recubrimiento",
+  "pvc": "placas pvc placa pvc plafon pvc plafón pvc",
+
+  "piso": "pisos piso spc laminado duela vinilico vinílico madera suelo",
+  "pisos": "pisos piso spc laminado duela vinilico vinílico madera suelo",
+  "spc": "pisos piso spc laminado duela vinilico vinílico",
+
+  "lambrin": "lambrin lambrín lambrines muro pared wpc interior exterior",
+  "lambrín": "lambrin lambrín lambrines muro pared wpc interior exterior",
+  "lambrines": "lambrin lambrín lambrines muro pared wpc interior exterior",
+
+  "papel": "papel tapiz wallpaper muro pared textura rollo",
+  "tapiz": "papel tapiz wallpaper muro pared textura rollo",
+  "papel tapiz": "papel tapiz wallpaper muro pared textura rollo",
+
+  "cortina": "cortinas cortina tela riel ventana ondas ondulada",
+  "cortinas": "cortinas cortina tela riel ventana ondas ondulada",
+
+  "persiana": "persianas persiana sheer elegance roller blackout ventana",
+  "persianas": "persianas persiana sheer elegance roller blackout ventana",
+
+  "follaje": "follaje artificial vegetacion vegetación muro verde plantas",
+  "follaje artificial": "follaje artificial vegetacion vegetación muro verde plantas",
+
+  "pasto": "pasto artificial pasto sintetico sintético cesped césped jardin jardín",
+  "pasto sintetico": "pasto artificial pasto sintetico sintético cesped césped jardin jardín",
+  "pasto sintético": "pasto artificial pasto sintetico sintético cesped césped jardin jardín",
+  "pasto artificial": "pasto artificial pasto sintetico sintético cesped césped jardin jardín",
+
+  "wall cladding": "wall cladding muro pared recubrimiento panel decorativo",
+  "cladding": "wall cladding muro pared recubrimiento panel decorativo",
+
+  "plafon": "plafon plafón pvc techo cielo falso panel pvc",
+  "plafón": "plafon plafón pvc techo cielo falso panel pvc",
+  "plafon pvc": "plafon plafón pvc techo cielo falso panel pvc",
+  "plafón pvc": "plafon plafón pvc techo cielo falso panel pvc",
+
+  "vigas": "vigas pvc vigas wpc viga decorativa madera falso plafon techo",
+  "viga": "vigas pvc vigas wpc viga decorativa madera falso plafon techo",
+  "vigas pvc": "vigas pvc vigas wpc viga decorativa madera falso plafon techo",
+  "vigas wpc": "vigas pvc vigas wpc viga decorativa madera falso plafon techo",
+};
+      const busquedaNormalizada = busqueda.toLowerCase().trim();
+
+const palabrasRelacionadas = Object.keys(sinonimos)
+  .filter((clave) => busquedaNormalizada.includes(clave))
+  .map((clave) => sinonimos[clave])
+  .join(" ");
+
+const texto = [
+  producto.nombre || "",
+  producto.codigo || "",
+  producto.categoria || "",
+  producto.descripcion || "",
+  producto.tipo_calculo || "",
+  palabrasRelacionadas,
+]
+  .join(" ")
+  .toLowerCase()
 
       return coincideCategoria && texto.includes(busqueda.toLowerCase());
     });
