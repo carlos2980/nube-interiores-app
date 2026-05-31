@@ -590,33 +590,35 @@ Enviado desde la App de Nube Interiores.
           {tab === "resumen" && (
   <section className="space-y-5">
     <div>
-      <h2 className="text-2xl font-bold">Resumen</h2>
+      <h2 className="text-2xl font-bold">Carrito</h2>
       <p className="text-sm text-neutral-500">
-        Productos agregados al carrito
+        Resumen de materiales seleccionados
       </p>
     </div>
 
     {carrito.length === 0 ? (
-      <p className="text-neutral-500">No hay productos agregados.</p>
+      <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 text-center text-neutral-500">
+        No hay materiales agregados.
+      </div>
     ) : (
-      carrito.map((item) => (
-        <div
-          key={item.id}
-          className="bg-white border border-[#e5ddd0] rounded-3xl p-4 shadow-sm space-y-1"
-        >
-          <p className="font-semibold">{item.producto}</p>
-          <p className="text-xs text-neutral-500">Código: {item.codigo}</p>
-          <p className="text-sm">
-            Medidas: {item.ancho} m × {item.alto} m
-          </p>
-          <p className="text-sm">
-            Cantidad: {item.cantidad} {item.unidad}
-          </p>
-          <p className="font-semibold">
-            Total: {formatPrice(item.total)}
-          </p>
-        </div>
-      ))
+      <div className="space-y-3">
+        {carrito.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white border border-[#e5ddd0] rounded-3xl p-4 shadow-sm"
+          >
+            <p className="font-semibold">{item.material}</p>
+            <p className="text-xs text-neutral-500">Código: {item.codigo}</p>
+
+            <div className="flex justify-between mt-2 text-sm">
+              <span>
+                {item.cantidad} {item.unidad}
+              </span>
+              <strong>{formatPrice(item.total)}</strong>
+            </div>
+          </div>
+        ))}
+      </div>
     )}
 
     <div className="bg-[#f3ecdf] rounded-3xl p-5">
@@ -627,6 +629,13 @@ Enviado desde la App de Nube Interiores.
         </strong>
       </div>
     </div>
+
+    <button
+      onClick={enviarCarritoWhatsApp}
+      className="w-full bg-[#25D366] text-white font-semibold py-4 rounded-2xl shadow-md"
+    >
+      💬 Enviar resumen por WhatsApp
+    </button>
   </section>
 )}
           {tab === "cotizador" && productoCalculo && (
