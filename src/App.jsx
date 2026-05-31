@@ -155,6 +155,18 @@ const areaActual = anchoNumero * altoNumero;
 const rendimientoCaja = Number(productoCalculo?.rendimiento_caja_m2 || 6.49);
 const precioCaja = Number(productoCalculo?.precio_caja || productoCalculo?.precio || 0);
 const cajasActuales = areaActual > 0 ? Math.ceil(areaActual / rendimientoCaja) : 0;
+  const esPlacaPvc = productoCalculo?.tipo_calculo === "placa_pvc_pza";
+
+const anchoPlaca = Number(productoCalculo?.ancho_pieza_m || 1.2);
+const altoPlaca = Number(productoCalculo?.largo_pieza_m || 2.4);
+
+const piezasAnchoPlaca =
+  esPlacaPvc && anchoNumero > 0 ? Math.ceil(anchoNumero / anchoPlaca) : 0;
+
+const piezasAltoPlaca =
+  esPlacaPvc && altoNumero > 0 ? Math.ceil(altoNumero / altoPlaca) : 0;
+
+const piezasPlacaPvc = piezasAnchoPlaca * piezasAltoPlaca;
 const esPapelTapiz = productoCalculo?.tipo_calculo === "papel-tapiz_rollo";
 
 const anchoRollo = Number(productoCalculo?.ancho_pieza_m || 0.53);
