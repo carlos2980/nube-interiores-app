@@ -589,6 +589,48 @@ Enviado desde la App de Nube Interiores.
             </section>
           )}
 
+          {tab === "resumen" && (
+  <section className="space-y-5">
+    <div>
+      <h2 className="text-2xl font-bold">Resumen</h2>
+      <p className="text-sm text-neutral-500">
+        Productos agregados al carrito
+      </p>
+    </div>
+
+    {carrito.length === 0 ? (
+      <p className="text-neutral-500">No hay productos agregados.</p>
+    ) : (
+      carrito.map((item) => (
+        <div
+          key={item.id}
+          className="bg-white border border-[#e5ddd0] rounded-3xl p-4 shadow-sm space-y-1"
+        >
+          <p className="font-semibold">{item.producto}</p>
+          <p className="text-xs text-neutral-500">Código: {item.codigo}</p>
+          <p className="text-sm">
+            Medidas: {item.ancho} m × {item.alto} m
+          </p>
+          <p className="text-sm">
+            Cantidad: {item.cantidad} {item.unidad}
+          </p>
+          <p className="font-semibold">
+            Total: {formatPrice(item.total)}
+          </p>
+        </div>
+      ))
+    )}
+
+    <div className="bg-[#f3ecdf] rounded-3xl p-5">
+      <div className="flex justify-between text-lg">
+        <span>Total general</span>
+        <strong>
+          {formatPrice(carrito.reduce((sum, item) => sum + item.total, 0))}
+        </strong>
+      </div>
+    </div>
+  </section>
+)}
           {tab === "cotizador" && productoCalculo && (
             <section className="space-y-5">
               <div className="grid grid-cols-2 gap-3">
