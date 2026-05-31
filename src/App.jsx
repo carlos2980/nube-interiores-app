@@ -856,7 +856,10 @@ return (
   ? "Rollos necesarios"
   : productoCalculo?.tipo_calculo === "placa_pvc_pza"
   ? "Piezas necesarias"
+  : productoCalculo?.tipo_calculo === "follaje_m2"
+  ? "Piezas necesarias"   
   : "Cajas necesarias"}
+ 
   </span>
 
   <strong>
