@@ -112,20 +112,6 @@ const [medidas, setMedidas] = useState({
     return productos.filter((producto) => {
       const coincideCategoria =
         categoria === "Todas" || producto.categoria === categoria;
-      const categoriasFiltradas = categoriasVisuales.filter((cat) => {
-  const buscar = busqueda.toLowerCase().trim();
-
-  if (!buscar) return true;
-
-  const textoBusqueda = `
-  ${producto.nombre || ""}
-  ${producto.codigo || ""}
-  ${producto.categoria || ""}
-  ${palabrasRelacionadas}
-`.toLowerCase();
-
-  return textoBusqueda.includes(buscar);
-});
 
       const sinonimos = {
   "placa pvc": "placas pvc placa pvc marmol mármol onix ónix arena grafito muro pared recubrimiento",
