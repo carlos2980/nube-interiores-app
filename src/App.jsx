@@ -443,7 +443,7 @@ return (
               </div>
 
               <div className="grid grid-cols-4 gap-4">
-                {categoriasVisuales.map((cat) => (
+                {categoriasFiltradas.map((cat) => (
                   <button
                     key={cat.nombre}
                     onClick={() => {
