@@ -118,8 +118,11 @@ const [medidas, setMedidas] = useState({
   if (!buscar) return true;
 
   const textoBusqueda = `
-    ${cat.nombre}
-  `.toLowerCase();
+  ${producto.nombre || ""}
+  ${producto.codigo || ""}
+  ${producto.categoria || ""}
+  ${palabrasRelacionadas}
+`.toLowerCase();
 
   return textoBusqueda.includes(buscar);
 });
