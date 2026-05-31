@@ -233,6 +233,35 @@ Enviado desde la App de Nube Interiores.
     "_blank"
   );
 }
+  function agregarAlCarrito() {
+  const item = {
+    id: Date.now(),
+    producto: productoMostrado?.nombre,
+    codigo: productoMostrado?.codigo,
+    ancho: anchoNumero,
+    alto: altoNumero,
+    area: areaActual,
+    tipo_calculo: productoCalculo?.tipo_calculo,
+    cantidad:
+      productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+        ? rollosActuales
+        : productoCalculo?.tipo_calculo === "lambrin_caja"
+        ? cajasActuales
+        : areaActual,
+    unidad:
+      productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+        ? "rollos"
+        : productoCalculo?.tipo_calculo === "lambrin_caja"
+        ? "cajas"
+        : "m²",
+    material,
+    instalacion,
+    total,
+  };
+
+  setCarrito((prev) => [...prev, item]);
+  setTab("resumen");
+}
   return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
       <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
