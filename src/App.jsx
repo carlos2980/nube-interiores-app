@@ -490,43 +490,25 @@ Enviado desde la App de Nube Interiores.
 </div>
 
 {imagenActualZoom && (
-  <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+  <div className="fixed inset-0 bg-black/90 z-50 flex flex-col p-4">
     <button
       onClick={() => setImagenZoom(null)}
-      className="absolute top-5 right-5 text-white text-3xl"
+      className="self-end text-white text-3xl mb-4"
     >
       ×
     </button>
 
-    <button
-      onClick={() =>
-        setImagenZoom((prev) =>
-          prev === 0 ? imagenesProducto.length - 1 : prev - 1
-        )
-      }
-      className="absolute left-4 text-white text-4xl"
-    >
-      ‹
-    </button>
-
-    <img
-  id={`zoom-${idx}`}
-  key={idx}
-  src={img}
-  alt=""
-  className="w-full flex-shrink-0 snap-center object-contain"
-/>
-
-    <button
-      onClick={() =>
-        setImagenZoom((prev) =>
-          prev === imagenesProducto.length - 1 ? 0 : prev + 1
-        )
-      }
-      className="absolute right-4 text-white text-4xl"
-    >
-      ›
-    </button>
+    <div className="flex overflow-x-auto snap-x snap-mandatory w-full flex-1">
+      {imagenesProducto.map((img, idx) => (
+        <img
+          id={`zoom-${idx}`}
+          key={idx}
+          src={img}
+          alt=""
+          className="w-full h-full flex-shrink-0 snap-center object-contain"
+        />
+      ))}
+    </div>
   </div>
 )}
 
