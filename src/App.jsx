@@ -71,8 +71,9 @@ const [medidas, setMedidas] = useState({
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
   useEffect(() => {
-    cargarProductos();
-  }, []);
+  cargarProductos();
+  cargarTodosModelos();
+}, []);
 
   async function cargarProductos() {
 
