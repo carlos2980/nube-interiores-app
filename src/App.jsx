@@ -126,6 +126,10 @@ const [medidas, setMedidas] = useState({
 
 const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 const productoMostrado = modeloActivo || producto;
+  const imagenesProducto = getImagenes(productoMostrado);
+
+const imagenActualZoom =
+  imagenZoom !== null ? imagenesProducto[imagenZoom] : null;
   const grupos = [...new Set(modelos.map((m) => m.grupo).filter(Boolean))];
 
 const modelosFiltrados = grupoActivo
@@ -471,22 +475,48 @@ Enviado desde la App de Nube Interiores.
       key={index}
       src={imagen}
       alt={`${productoMostrado.nombre} ${index + 1}`}
-      onClick={() => setImagenZoom(imagen)}
+      onClick={() => setImagenZoom(index)}
       className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center cursor-zoom-in"
     />
   ))}
 </div>
 
-{imagenZoom && (
-  <div
-    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-    onClick={() => setImagenZoom(null)}
-  >
+{imagenActualZoom && (
+  <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <button
+      onClick={() => setImagenZoom(null)}
+      className="absolute top-5 right-5 text-white text-3xl"
+    >
+      ×
+    </button>
+
+    <button
+      onClick={() =>
+        setImagenZoom((prev) =>
+          prev === 0 ? imagenesProducto.length - 1 : prev - 1
+        )
+      }
+      className="absolute left-4 text-white text-4xl"
+    >
+      ‹
+    </button>
+
     <img
-      src={imagenZoom}
+      src={imagenActualZoom}
       alt="Zoom"
       className="max-w-full max-h-full object-contain"
     />
+
+    <button
+      onClick={() =>
+        setImagenZoom((prev) =>
+          prev === imagenesProducto.length - 1 ? 0 : prev + 1
+        )
+      }
+      className="absolute right-4 text-white text-4xl"
+    >
+      ›
+    </button>
   </div>
 )}
 
