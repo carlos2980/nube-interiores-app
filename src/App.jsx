@@ -746,8 +746,10 @@ return (
   <div className="flex justify-between">
   <span>
     {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-      ? "Rollos necesarios"
-      : "Cajas necesarias"}
+  ? "Rollos necesarios"
+  : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+  ? "Piezas necesarias"
+  : "Cajas necesarias"}
   </span>
 
   <strong>
