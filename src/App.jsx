@@ -322,7 +322,10 @@ return (
           </button>
 
           <h1 className="font-semibold text-lg">Nube Interiores</h1>
-          <div className="relative">
+          <button
+  onClick={() => setTab("resumen")}
+  className="relative"
+>
   <ShoppingCart size={22} />
 
   {carrito.length > 0 && (
@@ -330,7 +333,7 @@ return (
       {carrito.length}
     </span>
   )}
-</div>
+</button>
         </div>
 
         <main className="px-5 pb-28">
