@@ -109,6 +109,18 @@ const [medidas, setMedidas] = useState({
 
   setModelos(data || []);
 }
+  async function cargarTodosModelos() {
+  const { data, error } = await supabase
+    .from("Modelos")
+    .select("*");
+
+  if (error) {
+    console.error("Error cargando todos los modelos:", error);
+    return;
+  }
+
+  setTodosModelos(data || []);
+}
 
   const productosFiltrados = useMemo(() => {
     return productos.filter((producto) => {
