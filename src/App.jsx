@@ -189,7 +189,12 @@ const texto = [
   .join(" ")
   .toLowerCase()
 
-      return coincideCategoria && texto.includes(busqueda.toLowerCase());
+     const palabrasBusqueda = busquedaNormalizada.split(" ").filter(Boolean);
+
+return (
+  coincideCategoria &&
+  palabrasBusqueda.every((palabra) => texto.includes(palabra))
+);
     });
   }, [productos, categoria, busqueda]);
 
