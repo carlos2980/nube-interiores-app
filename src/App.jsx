@@ -58,6 +58,7 @@ export default function App() {
 const [productoActivo, setProductoActivo] = useState(null);
 
 const [modelos, setModelos] = useState([]);
+  const [todosModelos, setTodosModelos] = useState([]);
 const [modeloActivo, setModeloActivo] = useState(null);
   const [grupoActivo, setGrupoActivo] = useState(null);
   const [carrito, setCarrito] = useState([]);
