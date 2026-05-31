@@ -659,23 +659,30 @@ Enviado desde la App de Nube Interiores.
               </label>
 
               <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
-                <div className="flex justify-between">
-                  <span>Material</span>
-                  <strong>{formatPrice(material)}</strong>
-                </div>
 
-                <div className="flex justify-between">
-                  <span>Instalación</span>
-                  <strong>{formatPrice(instalacion)}</strong>
-                </div>
+  <div className="flex justify-between">
+    <span>Material</span>
+    <strong>{formatPrice(material)}</strong>
+  </div>
 
-                <div className="border-t pt-3 flex justify-between text-lg">
-                  <span>Total</span>
-                  <strong>{formatPrice(total)}</strong>
-                </div>
-              </div>
-              <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
+  <div className="flex justify-between">
+    <span>Instalación</span>
+    <strong>{formatPrice(instalacion)}</strong>
+  </div>
+
+  <div className="border-t pt-3 flex justify-between text-lg">
+    <span>Total</span>
+    <strong>{formatPrice(total)}</strong>
+  </div>
+
 </div>
+
+<button
+  onClick={agregarAlCarrito}
+  className="w-full bg-black text-white font-semibold py-4 rounded-2xl mt-4 shadow-md"
+>
+  🛒 Agregar al carrito
+</button>
 
 <button
   onClick={enviarWhatsApp}
