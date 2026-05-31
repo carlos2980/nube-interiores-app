@@ -214,7 +214,9 @@ return (
     ${cat.nombre.replace("Vigas WPC", "vigas wpc vigas pvc viga decorativa")}
   `.toLowerCase();
 
-  return textoBusqueda.includes(buscar);
+ const palabras = buscar.split(" ").filter(Boolean);
+
+return palabras.every((palabra) => textoBusqueda.includes(palabra));
 });
 
 const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
