@@ -199,11 +199,13 @@ const calculo = {
       : null,
 
   totalMaterial:
-    productoCalculo?.tipo_calculo === "lambrin_caja"
-      ? cajasActuales * precioCaja
-      : productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-      ? rollosActuales * precioRollo
-      : areaActual * Number(productoCalculo?.precio || 0),
+  productoCalculo?.tipo_calculo === "lambrin_caja"
+    ? cajasActuales * precioCaja
+    : productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+    ? rollosActuales * precioRollo
+    : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+    ? piezasPlacaPvc * Number(productoCalculo?.precio || 0)
+    : areaActual * Number(productoCalculo?.precio || 0),
 };
   const material = calculo.totalMaterial || 0;
 
