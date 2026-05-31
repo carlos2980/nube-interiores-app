@@ -210,6 +210,9 @@ const calculo = {
   const material = calculo.totalMaterial || 0;
 
 console.log("TIPO:", productoCalculo?.tipo_calculo);
+  console.log("PIEZAS:", piezasPlacaPvc);
+console.log("INSTALACION:", productoCalculo?.instalacion);
+console.log("CALCULO INST:", instalacion);
 
 const instalacion = incluirInstalacion
   ? productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
