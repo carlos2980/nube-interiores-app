@@ -260,7 +260,39 @@ Enviado desde la App de Nube Interiores.
   setCarrito((prev) => [...prev, item]);
   setTab("resumen");
 }
-  return (
+
+function enviarCarritoWhatsApp() {
+  const totalGeneral = carrito.reduce(
+    (sum, item) => sum + item.total,
+    0
+  );
+
+  const detalle = carrito
+    .map(
+      (item, index) =>
+`#${index + 1}
+${item.material}
+Código: ${item.codigo}
+Cantidad: ${item.cantidad} ${item.unidad}
+Total: ${formatPrice(item.total)}`
+    )
+    .join("\n\n");
+
+  const mensaje = `
+*NUBE INTERIORES*
+
+${detalle}
+
+*TOTAL GENERAL:* ${formatPrice(totalGeneral)}
+`;
+
+  window.open(
+    `https://wa.me/526862321867?text=${encodeURIComponent(mensaje)}`,
+    "_blank"
+  );
+}
+
+return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
       <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
         <div className="px-6 pt-6 pb-4 flex items-center justify-between">
