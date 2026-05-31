@@ -475,7 +475,15 @@ Enviado desde la App de Nube Interiores.
       key={index}
       src={imagen}
       alt={`${productoMostrado.nombre} ${index + 1}`}
-      onClick={() => setImagenZoom(index)}
+      onClick={() => {
+  setImagenZoom(index);
+
+  setTimeout(() => {
+    document
+      .getElementById(`zoom-${index}`)
+      ?.scrollIntoView({ behavior: "instant", inline: "center" });
+  }, 50);
+}}
       className="w-full h-72 object-cover rounded-3xl flex-shrink-0 snap-center cursor-zoom-in"
     />
   ))}
