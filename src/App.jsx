@@ -214,6 +214,8 @@ console.log("TIPO:", productoCalculo?.tipo_calculo);
 const instalacion = incluirInstalacion
   ? productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? rollosActuales * Number(productoCalculo?.instalacion || 0)
+    : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+    ? piezasPlacaPvc * Number(productoCalculo?.instalacion || 0)
     : areaActual * Number(productoCalculo?.instalacion || 0)
   : 0;
 
