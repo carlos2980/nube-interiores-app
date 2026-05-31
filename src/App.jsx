@@ -250,17 +250,21 @@ Enviado desde la App de Nube Interiores.
   function agregarAlCarrito() {
   const cantidad =
     productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-      ? rollosActuales
-      : productoCalculo?.tipo_calculo === "lambrin_caja"
-      ? cajasActuales
-      : areaActual;
+    ? rollosActuales
+    : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+    ? piezasPlacaPvc
+    : productoCalculo?.tipo_calculo === "lambrin_caja"
+    ? cajasActuales
+    : areaActual;
 
   const unidad =
     productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-      ? "rollos"
-      : productoCalculo?.tipo_calculo === "lambrin_caja"
-      ? "cajas"
-      : "m²";
+    ? "rollos"
+    : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+    ? "pzas"
+    : productoCalculo?.tipo_calculo === "lambrin_caja"
+    ? "cajas"
+    : "m²";
 
   const item = {
     id: Date.now(),
