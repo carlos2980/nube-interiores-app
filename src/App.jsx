@@ -197,6 +197,25 @@ return (
 );
     });
   }, [productos, categoria, busqueda]);
+  
+  const categoriasFiltradas = categoriasVisuales.filter((cat) => {
+  const buscar = busqueda.toLowerCase().trim();
+
+  if (!buscar) return true;
+
+  const textoBusqueda = `
+    ${cat.nombre}
+    ${cat.nombre.replace("PVC", "placa pvc pvc placas plafon plafón")}
+    ${cat.nombre.replace("SPC", "piso pisos laminado spc")}
+    ${cat.nombre.replace("Lambrín", "lambrin lambrines")}
+    ${cat.nombre.replace("Pasto Artificial", "pasto sintetico sintético cesped césped")}
+    ${cat.nombre.replace("Follaje Artificial", "follaje vegetacion vegetación artificial muro verde")}
+    ${cat.nombre.replace("Wall Cladding", "wall cladding revestimiento recubrimiento")}
+    ${cat.nombre.replace("Vigas WPC", "vigas wpc vigas pvc viga decorativa")}
+  `.toLowerCase();
+
+  return textoBusqueda.includes(buscar);
+});
 
 const producto = productoActivo || productosFiltrados[0] || productos[0] || null;
 const productoMostrado = modeloActivo || producto;
