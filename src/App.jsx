@@ -251,7 +251,13 @@ const productoCalculo = modeloActivo
   const anchoNumero = parseFloat(medidas.ancho) || 0;
 const altoNumero = parseFloat(medidas.alto) || 0;
 const areaActual = anchoNumero * altoNumero;
-  const piezasFollaje = Math.ceil(areaActual * 16);
+  const areaPiezaFollaje =
+  Number(productoCalculo?.ancho_pieza_m || 0.25) *
+  Number(productoCalculo?.largo_pieza_m || 0.25);
+
+const piezasFollaje = Math.ceil(
+  areaActual / areaPiezaFollaje
+);
 
 const rendimientoCaja = Number(productoCalculo?.rendimiento_caja_m2 || 6.49);
 const precioCaja = Number(productoCalculo?.precio_caja || productoCalculo?.precio || 0);
