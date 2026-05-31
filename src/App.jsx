@@ -753,10 +753,13 @@ Enviado desde la App de Nube Interiores.
             Cotizar
           </button>
 
-          <button className="flex flex-col items-center text-xs">
-            <FileText size={20} />
-            Resumen
-          </button>
+         <button
+  onClick={() => setTab("resumen")}
+  className="flex flex-col items-center text-xs"
+>
+  <FileText size={20} />
+  Resumen
+</button>
 
           <button className="flex flex-col items-center text-xs">
             <User size={20} />
