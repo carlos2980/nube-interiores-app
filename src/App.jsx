@@ -700,8 +700,6 @@ Enviado desde la App de Nube Interiores.
                 />
               </label>
 
-              <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
-
   <div className="flex justify-between">
     <span>Material</span>
     <strong>{formatPrice(material)}</strong>
