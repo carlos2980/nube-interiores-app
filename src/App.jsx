@@ -258,7 +258,11 @@ Enviado desde la App de Nube Interiores.
   };
 
   setCarrito((prev) => [...prev, item]);
-  setTab("resumen");
+
+setProductoActivo(null);
+setModeloActivo(null);
+setGrupoActivo(null);
+setTab("catalogo");
 }
 
 function enviarCarritoWhatsApp() {
