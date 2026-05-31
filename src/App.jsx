@@ -234,28 +234,26 @@ Enviado desde la App de Nube Interiores.
   );
 }
   function agregarAlCarrito() {
+  const cantidad =
+    productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+      ? rollosActuales
+      : productoCalculo?.tipo_calculo === "lambrin_caja"
+      ? cajasActuales
+      : areaActual;
+
+  const unidad =
+    productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+      ? "rollos"
+      : productoCalculo?.tipo_calculo === "lambrin_caja"
+      ? "cajas"
+      : "m²";
+
   const item = {
     id: Date.now(),
-    producto: productoMostrado?.nombre,
+    material: productoMostrado?.nombre,
     codigo: productoMostrado?.codigo,
-    ancho: anchoNumero,
-    alto: altoNumero,
-    area: areaActual,
-    tipo_calculo: productoCalculo?.tipo_calculo,
-    cantidad:
-      productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-        ? rollosActuales
-        : productoCalculo?.tipo_calculo === "lambrin_caja"
-        ? cajasActuales
-        : areaActual,
-    unidad:
-      productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-        ? "rollos"
-        : productoCalculo?.tipo_calculo === "lambrin_caja"
-        ? "cajas"
-        : "m²",
-    material,
-    instalacion,
+    cantidad,
+    unidad,
     total,
   };
 
