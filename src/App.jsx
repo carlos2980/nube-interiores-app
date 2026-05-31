@@ -190,7 +190,7 @@ return (
   palabrasBusqueda.every((palabra) => texto.includes(palabra))
 );
     });
-  }, [productos, categoria, busqueda]);
+  }, [productos, todosModelos, categoria, busqueda]);
   
   const categoriasFiltradas = categoriasVisuales.filter((cat) => {
   const buscar = busqueda.toLowerCase().trim();
