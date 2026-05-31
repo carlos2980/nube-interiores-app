@@ -873,8 +873,10 @@ return (
   ? `${rollosActuales} rollo${rollosActuales === 1 ? "" : "s"}`
   : productoCalculo?.tipo_calculo === "placa_pvc_pza"
   ? `${piezasPlacaPvc} pieza${piezasPlacaPvc === 1 ? "" : "s"}`
-  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`}
-  }
+  : productoCalculo?.tipo_calculo === "follaje_m2"
+  ? `${piezasFollaje} pieza${piezasFollaje === 1 ? "" : "s"}`
+  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`
+}
 </strong>
 </div>
 </div>
