@@ -166,12 +166,18 @@ const palabrasRelacionadas = Object.keys(sinonimos)
   .map((clave) => sinonimos[clave])
   .join(" ");
 
+const modelosDelProducto = todosModelos
+  .filter((m) => m.producto_id === producto.id)
+  .map((m) => `${m.nombre || ""} ${m.codigo || ""} ${m.grupo || ""}`)
+  .join(" ");
+
 const texto = [
   producto.nombre || "",
   producto.codigo || "",
   producto.categoria || "",
   producto.descripcion || "",
   producto.tipo_calculo || "",
+  modelosDelProducto,
   palabrasRelacionadas,
 ]
   .join(" ")
