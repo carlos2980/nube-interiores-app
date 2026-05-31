@@ -510,10 +510,12 @@ Enviado desde la App de Nube Interiores.
     </button>
 
     <img
-      src={imagenActualZoom}
-      alt="Zoom"
-      className="max-w-full max-h-full object-contain"
-    />
+  id={`zoom-${idx}`}
+  key={idx}
+  src={img}
+  alt=""
+  className="w-full flex-shrink-0 snap-center object-contain"
+/>
 
     <button
       onClick={() =>
