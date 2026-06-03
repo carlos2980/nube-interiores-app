@@ -269,7 +269,14 @@ const piezasAnchoWall =
 const piezasAltoWall =
   esWallCladding && altoNumero > 0 ? Math.ceil(altoNumero / altoWall) : 0;
 
-const piezasWallCladding = piezasAnchoWall * piezasAltoWall;
+const areaPiezaWall =
+  Number(productoCalculo?.ancho_pieza_m || 0) *
+  Number(productoCalculo?.largo_pieza_m || 0);
+
+const piezasWallCladding =
+  areaPiezaWall > 0
+    ? Math.ceil(areaActual / areaPiezaWall)
+    : 0;
 
 const rendimientoCaja = Number(productoCalculo?.rendimiento_caja_m2 || 6.49);
 const precioCaja = Number(productoCalculo?.precio_caja || productoCalculo?.precio || 0);
