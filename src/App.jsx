@@ -889,6 +889,8 @@ return (
   : productoCalculo?.tipo_calculo === "follaje_m2"
   ? "Piezas necesarias"   
   : "Cajas necesarias"}
+    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+? "Piezas necesarias"
  
   </span>
 
