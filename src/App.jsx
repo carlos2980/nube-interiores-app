@@ -324,9 +324,9 @@ const calculo = {
     ? rollosActuales * precioRollo
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
     ? piezasPlacaPvc * Number(productoCalculo?.precio || 0)
+    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+    ? piezasWallCladding * Number(productoCalculo?.precio || 0)
     : areaActual * Number(productoCalculo?.precio || 0),
-  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-? "Piezas necesarias"
   
 };
   const material = calculo.totalMaterial || 0;
