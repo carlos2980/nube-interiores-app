@@ -325,6 +325,9 @@ const calculo = {
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
     ? piezasPlacaPvc * Number(productoCalculo?.precio || 0)
     : areaActual * Number(productoCalculo?.precio || 0),
+  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+? piezasWallCladding * Number(productoCalculo?.precio || 0)
+  
 };
   const material = calculo.totalMaterial || 0;
 
@@ -337,7 +340,7 @@ const instalacion = incluirInstalacion
     ? piezasPlacaPvc * Number(productoCalculo?.instalacion || 0)
     : areaActual * Number(productoCalculo?.instalacion || 0)
   : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-? piezasWallCladding * Number(productoCalculo?.precio || 0)
+? areaActual * Number(productoCalculo?.instalacion || 0)
   : 0;
 
 const total = material + instalacion;
