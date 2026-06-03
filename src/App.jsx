@@ -390,10 +390,12 @@ Enviado desde la App de Nube Interiores.
     ? cajasActuales
     : areaActual;
 
-  const unidad =
-    productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+ const unidad =
+  productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? "rollos"
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+    ? "pzas"
+    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
     ? "pzas"
     : productoCalculo?.tipo_calculo === "lambrin_caja"
     ? "cajas"
