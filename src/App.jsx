@@ -258,6 +258,18 @@ const areaActual = anchoNumero * altoNumero;
 const piezasFollaje = Math.ceil(
   areaActual / areaPiezaFollaje
 );
+  const esWallCladding = productoCalculo?.tipo_calculo === "wall_cladding_pza";
+
+const anchoWall = Number(productoCalculo?.ancho_pieza_m || 0.119);
+const altoWall = Number(productoCalculo?.largo_pieza_m || 2.9);
+
+const piezasAnchoWall =
+  esWallCladding && anchoNumero > 0 ? Math.ceil(anchoNumero / anchoWall) : 0;
+
+const piezasAltoWall =
+  esWallCladding && altoNumero > 0 ? Math.ceil(altoNumero / altoWall) : 0;
+
+const piezasWallCladding = piezasAnchoWall * piezasAltoWall;
 
 const rendimientoCaja = Number(productoCalculo?.rendimiento_caja_m2 || 6.49);
 const precioCaja = Number(productoCalculo?.precio_caja || productoCalculo?.precio || 0);
