@@ -380,12 +380,12 @@ Enviado desde la App de Nube Interiores.
 }
   function agregarAlCarrito() {
   const cantidad =
-    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-? piezasWallCladding
-    productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+  productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? rollosActuales
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
     ? piezasPlacaPvc
+    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+    ? piezasWallCladding
     : productoCalculo?.tipo_calculo === "lambrin_caja"
     ? cajasActuales
     : areaActual;
