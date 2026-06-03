@@ -346,8 +346,6 @@ const instalacion = incluirInstalacion
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
     ? piezasPlacaPvc * Number(productoCalculo?.instalacion || 0)
     : areaActual * Number(productoCalculo?.instalacion || 0)
-  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-? `${piezasWallCladding} pieza${piezasWallCladding === 1 ? "" : "s"}`
   : 0;
 
 const total = material + instalacion;
@@ -382,6 +380,8 @@ Enviado desde la App de Nube Interiores.
 }
   function agregarAlCarrito() {
   const cantidad =
+    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+? piezasWallCladding
     productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? rollosActuales
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
@@ -887,10 +887,10 @@ return (
   : productoCalculo?.tipo_calculo === "placa_pvc_pza"
   ? "Piezas necesarias"
   : productoCalculo?.tipo_calculo === "follaje_m2"
-  ? "Piezas necesarias"   
+  ? "Piezas necesarias"
+  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+  ? "Piezas necesarias"
   : "Cajas necesarias"}
-    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-? "Piezas necesarias"
  
   </span>
 
@@ -901,7 +901,9 @@ return (
   ? `${piezasPlacaPvc} pieza${piezasPlacaPvc === 1 ? "" : "s"}`
   : productoCalculo?.tipo_calculo === "follaje_m2"
   ? `${piezasFollaje} pieza${piezasFollaje === 1 ? "" : "s"}`
-  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`
+  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+  ? `${piezasWallCladding} pieza${piezasWallCladding === 1 ? "" : "s"}`
+  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`}`
 }
 </strong>
 </div>
