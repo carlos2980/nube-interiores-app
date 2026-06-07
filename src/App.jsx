@@ -101,13 +101,16 @@ const [medidas, setMedidas] = useState({
   }
 }
   async function login() {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("Usuarios")
     .select("*")
-    .eq("usuario", usuarioInput)
-    .eq("password", password)
+    .eq("usuario", usuarioInput.trim())
+    .eq("password", password.trim())
     .eq("activo", true)
     .single();
+
+  console.log("LOGIN DATA:", data);
+  console.log("LOGIN ERROR:", error);
 
   if (data) {
     setUsuario(data);
