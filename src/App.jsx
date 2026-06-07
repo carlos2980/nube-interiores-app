@@ -63,6 +63,10 @@ const [modeloActivo, setModeloActivo] = useState(null);
   const [grupoActivo, setGrupoActivo] = useState(null);
   const [carrito, setCarrito] = useState([]);
 const [imagenZoom, setImagenZoom] = useState(null);
+  const [usuario, setUsuario] = useState(null);
+const [mostrarLogin, setMostrarLogin] = useState(false);
+const [usuarioInput, setUsuarioInput] = useState("");
+const [password, setPassword] = useState("");
 const [medidas, setMedidas] = useState({
   ancho: "1",
   alto: "1",
@@ -71,8 +75,11 @@ const [medidas, setMedidas] = useState({
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
   useEffect(() => {
-  cargarProductos();
-  cargarTodosModelos();
+  const guardado = localStorage.getItem("usuarioNube");
+
+  if (guardado) {
+    setUsuario(JSON.parse(guardado));
+  }
 }, []);
 
   async function cargarProductos() {
