@@ -516,11 +516,38 @@ return (
     </p>
   )}
 </div>
-          <button
-  onClick={() => setTab("resumen")}
-  className="relative"
->
-  <ShoppingCart size={22} />
+          <div className="flex items-center gap-2">
+
+  {usuario ? (
+    <button
+      onClick={logout}
+      className="text-[11px] bg-red-100 px-2 py-1 rounded-lg"
+    >
+      Salir
+    </button>
+  ) : (
+    <button
+      onClick={() => setMostrarLogin(true)}
+      className="text-[11px] bg-black text-white px-2 py-1 rounded-lg"
+    >
+      Entrar
+    </button>
+  )}
+
+  <button
+    onClick={() => setTab("resumen")}
+    className="relative"
+  >
+    <ShoppingCart size={22} />
+
+    {carrito.length > 0 && (
+      <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+        {carrito.length}
+      </span>
+    )}
+  </button>
+
+</div>
 
   {carrito.length > 0 && (
     <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
