@@ -100,6 +100,28 @@ const [medidas, setMedidas] = useState({
     setProductos(respuesta.data || []);
   }
 }
+  async function login() {
+  const { data } = await supabase
+    .from("Usuarios")
+    .select("*")
+    .eq("usuario", usuarioInput)
+    .eq("password", password)
+    .eq("activo", true)
+    .single();
+
+  if (data) {
+    setUsuario(data);
+    setMostrarLogin(false);
+    localStorage.setItem("usuarioNube", JSON.stringify(data));
+  } else {
+    alert("Usuario o contraseña incorrectos");
+  }
+}
+
+function logout() {
+  localStorage.removeItem("usuarioNube");
+  setUsuario(null);
+}
    async function cargarModelos(productoId) {
   const { data, error } = await supabase
     .from("Modelos")
