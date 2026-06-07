@@ -519,78 +519,68 @@ return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
       <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
         <div className="px-6 pt-6 pb-4 flex items-center justify-between">
-          <button
-            onClick={() => {
-  if (tab === "producto") {
-    if (modeloActivo) {
-      setTab("modelos");
-    } else {
-      setTab("catalogo");
-    }
-  } else if (tab === "modelos") {
-    setTab("catalogo");
-  }
-}}
-            className="p-2"
-          >
-            {tab === "producto" || tab === "modelos" ? (
-  <ArrowLeft size={22} />
-) : (
-  <Grid2X2 size={22} />
-)}
-          </button>
-
-          <div className="text-center">
-  <h1 className="font-semibold text-lg">
-    Nube Interiores
-  </h1>
-
-  {usuario && (
-    <p className="text-[10px] text-green-600">
-      {usuario.usuario} • {usuario.descuento}% OFF
-    </p>
-  )}
-</div>
-          <div className="flex items-center gap-2">
-
-  {usuario ? (
-    <button
-      onClick={logout}
-      className="text-[11px] bg-red-100 px-2 py-1 rounded-lg"
-    >
-      Salir
-    </button>
-  ) : (
-    <button
-      onClick={() => setMostrarLogin(true)}
-      className="text-[11px] bg-black text-white px-2 py-1 rounded-lg"
-    >
-      Entrar
-    </button>
-  )}
-
   <button
-    onClick={() => setTab("resumen")}
-    className="relative"
+    onClick={() => {
+      if (tab === "producto") {
+        if (modeloActivo) {
+          setTab("modelos");
+        } else {
+          setTab("catalogo");
+        }
+      } else if (tab === "modelos") {
+        setTab("catalogo");
+      }
+    }}
+    className="p-2"
   >
-    <ShoppingCart size={22} />
-
-    {carrito.length > 0 && (
-      <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-        {carrito.length}
-      </span>
+    {tab === "producto" || tab === "modelos" ? (
+      <ArrowLeft size={22} />
+    ) : (
+      <Grid2X2 size={22} />
     )}
   </button>
 
-</div>
+  <div className="text-center">
+    <h1 className="font-semibold text-lg">Nube Interiores</h1>
 
-  {carrito.length > 0 && (
-    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-      {carrito.length}
-    </span>
-  )}
-</button>
-        </div>
+    {usuario && (
+      <p className="text-[10px] text-green-600">
+        {usuario.usuario} • {usuario.descuento}% OFF
+      </p>
+    )}
+  </div>
+
+  <div className="flex items-center gap-2">
+    {usuario ? (
+      <button
+        onClick={logout}
+        className="text-[11px] bg-red-100 px-2 py-1 rounded-lg"
+      >
+        Salir
+      </button>
+    ) : (
+      <button
+        onClick={() => setMostrarLogin(true)}
+        className="text-[11px] bg-black text-white px-2 py-1 rounded-lg"
+      >
+        Entrar
+      </button>
+    )}
+
+    <button
+      onClick={() => setTab("resumen")}
+      className="relative"
+    >
+      <ShoppingCart size={22} />
+
+      {carrito.length > 0 && (
+        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+          {carrito.length}
+        </span>
+      )}
+    </button>
+  </div>
+</div>
 
         <main className="px-5 pb-28">
           {tab === "inicio" && (
