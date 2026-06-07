@@ -514,7 +514,6 @@ ${detalle}
       </div>
     )}
 
-    <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
 return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
       <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
