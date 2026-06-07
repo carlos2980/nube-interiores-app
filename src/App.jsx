@@ -397,7 +397,7 @@ ${
     : `Cantidad: ${calculo.cajas || areaActual.toFixed(2)}`
 }
 
-Material: ${formatPrice(material)}
+Material: ${formatPrice(materialConDescuento)}
 Instalación: ${formatPrice(instalacion)}
 Total: ${formatPrice(total)}
 
@@ -954,7 +954,7 @@ return (
   <div className="bg-[#f3ecdf] rounded-3xl p-5 space-y-2">
   <div className="flex justify-between">
     <span>Material</span>
-    <strong>{formatPrice(material)}</strong>
+    <strong>{formatPrice(materialConDescuento)}</strong>
   </div>
 
   <div className="flex justify-between">
