@@ -105,7 +105,7 @@ const [medidas, setMedidas] = useState({
     .from("Usuarios")
     .select("*")
     .eq("usuario", usuarioInput)
-    .eq("password", password)
+    .eq("contraseña", password)
     .eq("activo", true)
     .single();
 
