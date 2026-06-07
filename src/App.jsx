@@ -103,19 +103,26 @@ const [medidas, setMedidas] = useState({
   async function login() {
   const { data, error } = await supabase
     .from("Usuarios")
-    .select("*")
-    .eq("usuario", usuarioInput.trim())
-    .eq("password", password.trim())
-    .eq("activo", true)
-    .single();
+    .select("*");
 
-  console.log("LOGIN DATA:", data);
-  console.log("LOGIN ERROR:", error);
+  console.log("USUARIOS:", data);
+  console.log("ERROR:", error);
+  console.log("Usuario escrito:", usuarioInput.trim());
+  console.log("Password escrito:", password.trim());
 
-  if (data) {
-    setUsuario(data);
+  const encontrado = data?.find(
+    (u) =>
+      u.usuario === usuarioInput.trim() &&
+      u.password === password.trim() &&
+      u.activo === true
+  );
+
+  console.log("ENCONTRADO:", encontrado);
+
+  if (encontrado) {
+    setUsuario(encontrado);
     setMostrarLogin(false);
-    localStorage.setItem("usuarioNube", JSON.stringify(data));
+    localStorage.setItem("usuarioNube", JSON.stringify(encontrado));
   } else {
     alert("Usuario o contraseña incorrectos");
   }
