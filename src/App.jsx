@@ -996,7 +996,7 @@ ${detalle}
   ? `${piezasFollaje} pieza${piezasFollaje === 1 ? "" : "s"}`
   : productoCalculo?.tipo_calculo === "wall_cladding_pza"
   ? `${piezasWallCladding} pieza${piezasWallCladding === 1 ? "" : "s"}`
-  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`}`
+  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`
 }
 </strong>
 </div>
