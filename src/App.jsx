@@ -366,6 +366,8 @@ const calculo = {
   
 };
   const material = calculo.totalMaterial || 0;
+  const descuento = Number(usuario?.descuento || 0);
+const materialConDescuento = material * (1 - descuento / 100);
 
 console.log("TIPO:", productoCalculo?.tipo_calculo);
   
