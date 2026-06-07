@@ -75,6 +75,9 @@ const [medidas, setMedidas] = useState({
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
 
  useEffect(() => {
+  cargarProductos();
+  cargarTodosModelos();
+
   const guardado = localStorage.getItem("usuarioNube");
 
   if (guardado) {
