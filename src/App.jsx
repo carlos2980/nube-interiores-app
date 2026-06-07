@@ -379,7 +379,7 @@ const instalacion = incluirInstalacion
     : areaActual * Number(productoCalculo?.instalacion || 0)
   : 0;
 
-const total = material + instalacion;
+const total = materialConDescuento + instalacion;
 function enviarWhatsApp() {
   const mensaje = `
 Hola, me interesa el siguiente producto:
