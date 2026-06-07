@@ -505,7 +505,17 @@ return (
 )}
           </button>
 
-          <h1 className="font-semibold text-lg">Nube Interiores</h1>
+          <div className="text-center">
+  <h1 className="font-semibold text-lg">
+    Nube Interiores
+  </h1>
+
+  {usuario && (
+    <p className="text-[10px] text-green-600">
+      {usuario.usuario} • {usuario.descuento}% OFF
+    </p>
+  )}
+</div>
           <button
   onClick={() => setTab("resumen")}
   className="relative"
