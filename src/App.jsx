@@ -480,6 +480,41 @@ ${detalle}
   );
 }
 
+  return (
+  <>
+    {mostrarLogin && (
+      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+        <div className="bg-white rounded-3xl p-6 w-[320px]">
+          <h2 className="text-xl font-bold mb-4">
+            Iniciar sesión
+          </h2>
+
+          <input
+            placeholder="Usuario"
+            value={usuarioInput}
+            onChange={(e) => setUsuarioInput(e.target.value)}
+            className="w-full border p-3 rounded-xl mb-3"
+          />
+
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border p-3 rounded-xl mb-4"
+          />
+
+          <button
+            onClick={login}
+            className="w-full bg-black text-white py-3 rounded-xl"
+          >
+            Entrar
+          </button>
+        </div>
+      </div>
+    )}
+
+    <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
 return (
     <div className="min-h-screen bg-[#f5f2eb] flex justify-center py-6 px-3">
       <div className="w-full max-w-sm bg-[#fcfbf8] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[#e8e1d5] relative min-h-[780px]">
