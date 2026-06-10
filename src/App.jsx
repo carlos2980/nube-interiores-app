@@ -451,6 +451,8 @@ Enviado desde la App de Nube Interiores.
     ? "pzas"
     : productoCalculo?.tipo_calculo === "lambrin_caja"
     ? "cajas"
+   : productoCalculo?.tipo_calculo === "pzs"
+? "pzas"
     : "m²";
 
   const item = {
