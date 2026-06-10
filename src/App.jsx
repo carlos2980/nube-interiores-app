@@ -26,7 +26,7 @@ const categoriasVisuales = [
   { nombre: "Papel Tapiz", imagen: "/categorias/papel-tapiz.png" },
 { nombre: "Vegetación Artificial", imagen: "/categorias/vegetacion-artificial.png" },
 { nombre: "Macetas", imagen: "/categorias/macetas.jpg" },
-  { nombre: "Cojines", imagen: "/categorias/cojines.png" },
+  { nombre: "Cojines", imagen: "/categorias/Cojines.png" },
 { nombre: "Pisos SPC", imagen: "/categorias/piso-spc.png" },
 ];
 
