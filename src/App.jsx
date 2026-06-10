@@ -293,6 +293,7 @@ const productoCalculo = modeloActivo
   const anchoNumero = parseFloat(medidas.ancho) || 0;
 const altoNumero = parseFloat(medidas.alto) || 0;
 const areaActual = anchoNumero * altoNumero;
+  const cantidadPiezas = parseFloat(cantidadPzs) || 0;
   const areaPiezaFollaje =
   Number(productoCalculo?.ancho_pieza_m || 0.25) *
   Number(productoCalculo?.largo_pieza_m || 0.25);
