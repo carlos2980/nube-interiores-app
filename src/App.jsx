@@ -954,41 +954,34 @@ ${detalle}
 )}
           {tab === "cotizador" && productoCalculo && (
             <section className="space-y-5">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
-                  <label className="text-xs text-neutral-500">Ancho</label>
-                  <input
-  type="number"
-  step="0.01"
-  value={medidas.ancho}
-  onChange={(e) => {
-    const valor = e.target.value;
-    setMedidas((prev) => ({
-      ...prev,
-      ancho: valor,
-    }));
-  }}
-  className="w-full text-lg font-semibold outline-none"
-/>
-                </div>
+              {productoCalculo?.tipo_calculo === "pzs" ? (
+  <>
+    <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
+      <label className="text-xs text-neutral-500">Cantidad de piezas</label>
+      <input
+        type="number"
+        step="1"
+        min="1"
+        value={cantidadPzs}
+        onChange={(e) => setCantidadPzs(e.target.value)}
+        className="w-full text-lg font-semibold outline-none"
+      />
+    </div>
 
-                <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
-                  <label className="text-xs text-neutral-500">Alto</label>
-                 <input
-  type="number"
-  step="0.01"
-  value={medidas.alto}
-  onChange={(e) => {
-  const valor = e.target.value;
-  setMedidas((prev) => ({
-    ...prev,
-    alto: valor,
-  }));
-}}
-  className="w-full text-lg font-semibold outline-none"
-/>
-                </div>
-              </div>
+    <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm">
+      <div className="flex justify-between">
+        <span>Cantidad</span>
+        <strong>
+          {cantidadPiezas} pieza{cantidadPiezas === 1 ? "" : "s"}
+        </strong>
+      </div>
+    </div>
+  </>
+) : (
+  <>
+    {/* aquí dejas tu bloque actual de Ancho, Alto, Área y piezas/cajas */}
+  </>
+)}
 
               <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
   <div className="flex justify-between">
