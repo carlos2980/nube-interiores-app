@@ -73,6 +73,7 @@ const [medidas, setMedidas] = useState({
 });
 
   const [incluirInstalacion, setIncluirInstalacion] = useState(true);
+  const [cantidadPzs, setCantidadPzs] = useState("1");
 
  useEffect(() => {
   cargarProductos();
