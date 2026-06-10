@@ -954,7 +954,7 @@ ${detalle}
 )}
           {tab === "cotizador" && productoCalculo && (
             <section className="space-y-5">
-              {productoCalculo?.tipo_calculo === "pzs" ? (
+       {productoCalculo?.tipo_calculo === "pzs" ? (
   <>
     <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
       <label className="text-xs text-neutral-500">Cantidad de piezas</label>
@@ -979,44 +979,74 @@ ${detalle}
   </>
 ) : (
   <>
-    {/* aquí dejas tu bloque actual de Ancho, Alto, Área y piezas/cajas */}
+    <div className="grid grid-cols-2 gap-3">
+      <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
+        <label className="text-xs text-neutral-500">Ancho</label>
+        <input
+          type="number"
+          step="0.01"
+          value={medidas.ancho}
+          onChange={(e) =>
+            setMedidas((prev) => ({
+              ...prev,
+              ancho: e.target.value,
+            }))
+          }
+          className="w-full text-lg font-semibold outline-none"
+        />
+      </div>
+
+      <div className="bg-white rounded-2xl border border-[#e5ddd0] p-3">
+        <label className="text-xs text-neutral-500">Alto</label>
+        <input
+          type="number"
+          step="0.01"
+          value={medidas.alto}
+          onChange={(e) =>
+            setMedidas((prev) => ({
+              ...prev,
+              alto: e.target.value,
+            }))
+          }
+          className="w-full text-lg font-semibold outline-none"
+        />
+      </div>
+    </div>
+
+    <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
+      <div className="flex justify-between">
+        <span>Área</span>
+        <strong>{areaActual.toFixed(2)} m²</strong>
+      </div>
+
+      <div className="flex justify-between">
+        <span>
+          {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+            ? "Rollos necesarios"
+            : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+            ? "Piezas necesarias"
+            : productoCalculo?.tipo_calculo === "follaje_m2"
+            ? "Piezas necesarias"
+            : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+            ? "Piezas necesarias"
+            : "Cajas necesarias"}
+        </span>
+
+        <strong>
+          {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
+            ? `${rollosActuales} rollo${rollosActuales === 1 ? "" : "s"}`
+            : productoCalculo?.tipo_calculo === "placa_pvc_pza"
+            ? `${piezasPlacaPvc} pieza${piezasPlacaPvc === 1 ? "" : "s"}`
+            : productoCalculo?.tipo_calculo === "follaje_m2"
+            ? `${piezasFollaje} pieza${piezasFollaje === 1 ? "" : "s"}`
+            : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+            ? `${piezasWallCladding} pieza${piezasWallCladding === 1 ? "" : "s"}`
+            : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`}
+        </strong>
+      </div>
+    </div>
   </>
 )}
-
-              <div className="bg-white border border-[#e5ddd0] rounded-3xl p-5 shadow-sm space-y-2">
-  <div className="flex justify-between">
-    <span>Área</span>
-    <strong>{areaActual.toFixed(2)} m²</strong>
-  </div>
-
-  <div className="flex justify-between">
-  <span>
-    {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-  ? "Rollos necesarios"
-  : productoCalculo?.tipo_calculo === "placa_pvc_pza"
-  ? "Piezas necesarias"
-  : productoCalculo?.tipo_calculo === "follaje_m2"
-  ? "Piezas necesarias"
-  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-  ? "Piezas necesarias"
-  : "Cajas necesarias"}
- 
-  </span>
-
-  <strong>
-  {productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
-  ? `${rollosActuales} rollo${rollosActuales === 1 ? "" : "s"}`
-  : productoCalculo?.tipo_calculo === "placa_pvc_pza"
-  ? `${piezasPlacaPvc} pieza${piezasPlacaPvc === 1 ? "" : "s"}`
-  : productoCalculo?.tipo_calculo === "follaje_m2"
-  ? `${piezasFollaje} pieza${piezasFollaje === 1 ? "" : "s"}`
-  : productoCalculo?.tipo_calculo === "wall_cladding_pza"
-  ? `${piezasWallCladding} pieza${piezasWallCladding === 1 ? "" : "s"}`
-  : `${cajasActuales} caja${cajasActuales === 1 ? "" : "s"}`
-}
-</strong>
-</div>
-</div>
 
               <label className="flex items-center justify-between bg-white border border-[#e5ddd0] rounded-2xl p-4">
                 <span className="font-semibold text-sm">Incluir instalación</span>
