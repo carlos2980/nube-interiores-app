@@ -438,6 +438,8 @@ Enviado desde la App de Nube Interiores.
     ? piezasWallCladding
     : productoCalculo?.tipo_calculo === "lambrin_caja"
     ? cajasActuales
+    : productoCalculo?.tipo_calculo === "pzs"
+? cantidadPiezas
     : areaActual;
 
  const unidad =
