@@ -422,6 +422,8 @@ const instalacion = incluirInstalacion
     ? rollosActuales * Number(productoCalculo?.instalacion || 0)
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
     ? piezasPlacaPvc * Number(productoCalculo?.instalacion || 0)
+    : productoCalculo?.tipo_calculo === "placa_pu_pza"
+    ? areaActual * Number(productoCalculo?.instalacion || 0)
     : productoCalculo?.tipo_calculo === "pzs"
     ? cantidadPiezas * Number(productoCalculo?.instalacion || 0)
     : areaActual * Number(productoCalculo?.instalacion || 0)
