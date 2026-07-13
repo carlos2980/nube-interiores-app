@@ -29,6 +29,7 @@ const categoriasVisuales = [
   { nombre: "Cojines", imagen: "/categorias/Cojines.png" },
   { nombre: "Decorativos", imagen: "/categorias/decoraciones.png" },
   { nombre: "Lámparas", imagen: "/categorias/lamparas.png" },
+  { nombre: "Placa PU", imagen: "/categorias/ROCCA-GRAY-B.jpg" },
 { nombre: "Pisos SPC", imagen: "/categorias/piso-spc.png" },
 ];
 
