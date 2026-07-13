@@ -342,6 +342,28 @@ const piezasAltoPlaca =
   esPlacaPvc && altoNumero > 0 ? Math.ceil(altoNumero / altoPlaca) : 0;
 
 const piezasPlacaPvc = piezasAnchoPlaca * piezasAltoPlaca;
+  const esPlacaPu =
+  productoCalculo?.tipo_calculo === "placa_pu_pza";
+
+const anchoPlacaPu = Number(
+  productoCalculo?.ancho_pieza_m || 1.2
+);
+
+const altoPlacaPu = Number(
+  productoCalculo?.largo_pieza_m || 0.6
+);
+
+const piezasAnchoPu =
+  esPlacaPu && anchoNumero > 0
+    ? Math.ceil(anchoNumero / anchoPlacaPu)
+    : 0;
+
+const piezasAltoPu =
+  esPlacaPu && altoNumero > 0
+    ? Math.ceil(altoNumero / altoPlacaPu)
+    : 0;
+
+const piezasPlacaPu = piezasAnchoPu * piezasAltoPu;
 const esPapelTapiz = productoCalculo?.tipo_calculo === "papel-tapiz_rollo";
 
 const anchoRollo = Number(productoCalculo?.ancho_pieza_m || 0.53);
