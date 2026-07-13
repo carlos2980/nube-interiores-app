@@ -57,9 +57,7 @@ function getImagenes(producto) {
 }
 export default function App() {
  const [tab, setTab] = useState("inicio");
-  const [categoria, setCategoria] = useState(() => {
-  return localStorage.getItem("categoriaNube") || "Todas";
-});
+  const [categoria, setCategoria] = useState("Todas");
   const [busqueda, setBusqueda] = useState("");
   const [productos, setProductos] = useState([]);
 const [productoActivo, setProductoActivo] = useState(null);
