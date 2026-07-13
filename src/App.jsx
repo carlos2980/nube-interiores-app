@@ -59,7 +59,9 @@ export default function App() {
   const [tab, setTab] = useState(() => {
   return localStorage.getItem("tabNube") || "inicio";
 });
-  const [categoria, setCategoria] = useState("Todas");
+  const [categoria, setCategoria] = useState(() => {
+  return localStorage.getItem("categoriaNube") || "Todas";
+});
   const [busqueda, setBusqueda] = useState("");
   const [productos, setProductos] = useState([]);
 const [productoActivo, setProductoActivo] = useState(null);
