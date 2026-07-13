@@ -83,6 +83,8 @@ const [medidas, setMedidas] = useState({
   const [cantidadPzs, setCantidadPzs] = useState("1");
 
  useEffect(() => {
+  localStorage.setItem("tabNube", tab);
+}, [tab]);
   cargarProductos();
   cargarTodosModelos();
 
