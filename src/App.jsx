@@ -1058,6 +1058,8 @@ ${detalle}
             ? "Piezas necesarias"
             : productoCalculo?.tipo_calculo === "follaje_m2"
             ? "Piezas necesarias"
+            : productoCalculo?.tipo_calculo === "placa_pu_pza"
+? "Piezas necesarias"
             : productoCalculo?.tipo_calculo === "wall_cladding_pza"
             ? "Piezas necesarias"
             : "Cajas necesarias"}
