@@ -401,8 +401,10 @@ const calculo = {
     : productoCalculo?.tipo_calculo === "papel-tapiz_rollo"
     ? rollosActuales * precioRollo
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
-    ? piezasPlacaPvc * Number(productoCalculo?.precio || 0)
-    : productoCalculo?.tipo_calculo === "wall_cladding_pza"
+? piezasPlacaPvc * Number(productoCalculo?.precio || 0)
+: productoCalculo?.tipo_calculo === "placa_pu_pza"
+? piezasPlacaPu * Number(productoCalculo?.precio || 0)
+: productoCalculo?.tipo_calculo === "wall_cladding_pza"
 ? piezasWallCladding * Number(productoCalculo?.precio || 0)
 : productoCalculo?.tipo_calculo === "pzs"
 ? cantidadPiezas * Number(productoCalculo?.precio || 0)
