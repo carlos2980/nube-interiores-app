@@ -56,9 +56,7 @@ function getImagenes(producto) {
   ].filter(Boolean);
 }
 export default function App() {
-  const [tab, setTab] = useState(() => {
-  return localStorage.getItem("tabNube") || "inicio";
-});
+ const [tab, setTab] = useState("inicio");
   const [categoria, setCategoria] = useState(() => {
   return localStorage.getItem("categoriaNube") || "Todas";
 });
