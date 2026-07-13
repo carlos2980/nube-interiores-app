@@ -465,6 +465,8 @@ Enviado desde la App de Nube Interiores.
     ? rollosActuales
     : productoCalculo?.tipo_calculo === "placa_pvc_pza"
     ? piezasPlacaPvc
+    : productoCalculo?.tipo_calculo === "placa_pu_pza"
+? piezasPlacaPu
     : productoCalculo?.tipo_calculo === "wall_cladding_pza"
     ? piezasWallCladding
     : productoCalculo?.tipo_calculo === "lambrin_caja"
